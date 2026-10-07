@@ -119,7 +119,7 @@
   .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); }
   @media (max-width: 1000px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
-  .card { display: flex; flex-direction: column; }
+  .card { position: relative; display: flex; flex-direction: column; }
   .pimg { position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--char); aspect-ratio: 4 / 5; overflow: hidden; cursor: pointer; }
   .pimg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
   .pimg img.bg { filter: blur(18px) brightness(.85); transform: scale(1.2); }
@@ -245,6 +245,74 @@
   .res-note { margin-top: 18px; padding: 14px 16px; background: rgba(138,113,64,.12); border-left: 3px solid var(--gold-deep); font-size: 15px; }
   #layer-result .btn { width: 100%; margin-top: 20px; }
 
+
+  /* ---------- área da loja ---------- */
+  .tag.dark { background: var(--char-deep); }
+  .card.soldout .pimg img { filter: grayscale(1) brightness(.8); }
+  .card.soldout .btn-outline { opacity: .55; cursor: not-allowed; }
+  .card.soldout .btn-outline:hover { background: transparent; color: var(--ink); }
+  @keyframes flash { 0%, 100% { outline-color: transparent; } 30%, 70% { outline-color: var(--gold-deep); } }
+  .card.flash .pimg { outline: 4px solid transparent; outline-offset: 5px; animation: flash 1.6s ease 2; }
+  .linkbtn { background: none; border: 0; padding: 0; color: #fff; font: inherit; text-decoration: underline; cursor: pointer; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  #layer-admin { align-items: center; justify-content: center; padding: 20px; }
+  #layer-admin .panel { width: min(1040px, 100%); height: min(92vh, 900px); display: flex; flex-direction: column; overflow: hidden; --from: translateY(18px) scale(.98); }
+  .adm-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px 16px 26px; border-bottom: 1px solid var(--line-l); background: var(--white); }
+  .adm-head h2 { font-size: 30px; }
+  .adm-head .x { position: static; background: rgba(38,36,37,.07); }
+  .adm-head-r { display: flex; align-items: center; gap: 14px; }
+  .adm-body { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: clamp(20px, 3vw, 36px); }
+  .adm-center { max-width: 440px; margin: 0 auto; padding-top: 16px; }
+  .adm-h { font-family: var(--display); font-weight: 300; font-size: 32px; line-height: 1.1; }
+  .adm-p { color: var(--muted-l); margin-top: 8px; }
+  .adm-hello { font-size: 22px; font-weight: 500; margin-bottom: 18px; }
+  .fld { margin: 18px 0; }
+  .fld label, .nvs h4 { display: block; font-weight: 600; font-size: 17px; margin-bottom: 8px; }
+  .fld input, .nvs input[type="text"], .nvs input[inputmode], .nm select, .pe {
+    width: 100%; min-height: 54px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line-l);
+    font-size: 17px; font-family: inherit; background: var(--white); color: var(--ink);
+  }
+  .fld input:focus, .nvs input:focus, .nm select:focus { outline: 3px solid var(--gold-deep); outline-offset: 1px; }
+  .btn-big { min-height: 64px; font-size: 20px; padding: 0 40px; }
+  .plist { margin-top: 14px; }
+  .prow { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line-l); }
+  .prow img { width: 56px; height: 70px; object-fit: cover; background: var(--char); }
+  .prow.off img { opacity: .4; }
+  .pinfo b { display: block; font-weight: 600; font-size: 17px; line-height: 1.25; }
+  .pinfo span { color: var(--gold-deep); font-weight: 600; margin-right: 10px; }
+  .pinfo em { font-style: normal; font-size: 14px; color: var(--muted-l); }
+  .pact { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+  .pact button { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-l); background: var(--white); font-size: 15px; font-weight: 500; cursor: pointer; }
+  .pact button:hover { border-color: var(--ink); }
+  .pact .pe { width: 130px; min-height: 44px; font-size: 16px; padding: 0 12px; }
+  @media (max-width: 760px) { .prow { grid-template-columns: 56px minmax(0, 1fr); } .pact { grid-column: 1 / -1; justify-content: flex-start; } }
+
+  .nv { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 48px); margin-top: 18px; align-items: start; }
+  .nvs { margin-bottom: 26px; }
+  .nvs h4 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; }
+  .nvs h4 span { width: 30px; height: 30px; border-radius: 50%; background: var(--char); color: #fff; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .drop { position: relative; display: flex; align-items: center; justify-content: center; min-height: 180px; border: 2px dashed var(--line-l); border-radius: 14px; background: var(--white); cursor: pointer; overflow: hidden; text-align: center; padding: 18px; }
+  .drop:hover, .drop:focus-within { border-color: var(--gold-deep); }
+  .drop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .drop-t b { display: block; font-size: 19px; }
+  .drop-t small { color: var(--muted-l); font-size: 15px; }
+  .drop.has .drop-t { position: relative; background: rgba(38,36,37,.78); color: #fff; padding: 8px 16px; border-radius: 999px; }
+  .drop.has .drop-t small { display: none; }
+  .drop.has .drop-t b { font-size: 15px; font-weight: 500; }
+  .nvs .btn-outline { margin-top: 12px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  .pill span { display: inline-flex; align-items: center; justify-content: center; min-width: 56px; min-height: 52px; padding: 0 18px; border: 1px solid var(--line-l); border-radius: 999px; background: var(--white); font-size: 17px; font-weight: 500; cursor: pointer; transition: background .15s ease, color .15s ease; }
+  .pill input:checked + span { background: var(--char); border-color: var(--char); color: #fff; }
+  .pill input:focus-visible + span { outline: 3px solid var(--gold-deep); outline-offset: 3px; }
+  .nv-side { position: sticky; top: 0; }
+  .nv-side .card { pointer-events: none; max-width: 300px; }
+  .nv-side .pimg { cursor: default; }
+  .nv-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted-d); font-size: 15px; text-align: center; padding: 16px; }
+  @media (max-width: 760px) { .nv { grid-template-columns: 1fr; } .nv-side { position: static; } #layer-admin { padding: 0; } #layer-admin .panel { width: 100%; height: 100%; max-height: none; } .btn-big { width: 100%; } }
+  .zone-note { font-size: 14px; color: var(--muted-l); margin-top: 8px; }
+
   /* ---------- aviso rápido e item voando ---------- */
   .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 80; background: var(--char-deep); color: #fff; padding: 14px 22px; border-radius: 999px; font-size: 16px; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; width: max-content; max-width: 90vw; text-align: center; }
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
@@ -267,6 +335,7 @@
     <a class="toplink" href="#colecao">Coleção</a>
     <a class="toplink" href="#como">Como comprar</a>
     <a class="toplink" href="#contato">Onde estamos</a>
+    <button type="button" class="cart-btn" id="adm-open" aria-label="Área da loja"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.4 7-5.4s6.2 1.8 7 5.4"/></svg><span class="t">Área da loja</span></button>
     <button type="button" class="cart-btn" id="cart-btn" aria-label="Abrir a sacola">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11l-1-12z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
       <span class="t">Sacola</span>
@@ -322,6 +391,7 @@
           <button type="button" class="chip" data-filter="todos" aria-pressed="true">Todos</button>
           <button type="button" class="chip" data-filter="roupas" aria-pressed="false">Roupas</button>
           <button type="button" class="chip" data-filter="tenis" aria-pressed="false">Tênis</button>
+          <button type="button" class="chip" data-filter="acessorios" aria-pressed="false" hidden>Acessórios</button>
         </div>
       </div>
     </div>
@@ -423,6 +493,7 @@
         <h3>Fale com a gente</h3>
         <p>WhatsApp: (66) 99620-1000</p>
         <p style="margin-top:8px">Instagram: <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer">@fitlivefashionwear</a></p>
+        <p style="margin-top:8px"><button type="button" class="linkbtn" id="adm-open-2">Área da loja, para funcionárias</button></p>
       </div>
     </div>
     <p class="foot-note">Protótipo de demonstração. Produtos, fotos e preços são exemplos, e os botões de pagamento não cobram nada.</p>
@@ -430,6 +501,90 @@
 </footer>
 
 <div class="bar" id="bar" hidden><button type="button" id="bar-btn"><span id="bar-left">Ver sacola</span><span id="bar-right"></span></button></div>
+
+
+<!-- ============ ÁREA DA LOJA ============ -->
+<div class="layer" id="layer-admin" role="dialog" aria-modal="true" aria-labelledby="adm-title" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="panel">
+    <div class="adm-head">
+      <h2 id="adm-title">Área da loja</h2>
+      <div class="adm-head-r">
+        <button type="button" class="rm" id="adm-logout" hidden>Sair</button>
+        <button type="button" class="x" data-close aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+      </div>
+    </div>
+    <div class="adm-body">
+
+      <section id="adm-login" class="adm-center">
+        <h3 class="adm-h">Entrar</h3>
+        <p class="adm-p">Acesso das funcionárias para publicar e editar as peças do site.</p>
+        <form id="adm-form" novalidate>
+          <div class="fld"><label for="adm-mail">E-mail</label><input id="adm-mail" type="email" autocomplete="off" placeholder="nome@fitlive.com.br"></div>
+          <div class="fld"><label for="adm-pass">Senha</label><input id="adm-pass" type="password" autocomplete="off" placeholder="••••••••"></div>
+          <button type="submit" class="btn btn-dark" style="width:100%" data-autofocus>Entrar</button>
+        </form>
+        <p class="res-note">Demonstração: pode entrar sem preencher nada, e não digite senhas reais. Na versão final, cada funcionária tem o próprio acesso, que a dona da loja pode desativar.</p>
+      </section>
+
+      <section id="adm-home" hidden>
+        <p class="adm-hello">Olá! O que você quer fazer?</p>
+        <button type="button" class="btn btn-gold btn-big" id="adm-new-btn">+ Nova peça</button>
+        <h3 class="adm-h" style="margin-top:38px">Peças no site</h3>
+        <p class="adm-p">Toque nos botões para mudar o preço, marcar como esgotada ou esconder uma peça.</p>
+        <ul class="plist" id="plist"></ul>
+      </section>
+
+      <section id="adm-new" hidden>
+        <button type="button" class="rm" id="nv-back">Voltar</button>
+        <h3 class="adm-h" style="margin-top:6px">Nova peça</h3>
+        <div class="nv">
+          <form id="nv-form" novalidate>
+            <div class="nvs">
+              <h4><span>1</span>Foto da peça</h4>
+              <label class="drop" id="nv-drop" for="nv-file">
+                <img id="nv-prev" alt="" hidden>
+                <span class="drop-t"><b id="nv-drop-b">Tirar foto ou escolher da galeria</b><small>Toque aqui</small></span>
+              </label>
+              <input class="sr" type="file" id="nv-file" accept="image/*">
+              <button type="button" class="btn btn-outline" id="nv-sample">Usar uma foto de exemplo</button>
+            </div>
+            <div class="nvs"><h4><span>2</span>Nome da peça</h4><input type="text" id="nv-name" autocomplete="off" placeholder="Ex: Legging cintura alta preta"></div>
+            <div class="nvs"><h4><span>3</span>Preço</h4><input type="text" id="nv-price" inputmode="numeric" autocomplete="off" placeholder="R$ 0,00"></div>
+            <div class="nvs">
+              <h4><span>4</span>Categoria</h4>
+              <div class="pills" role="radiogroup" aria-label="Categoria">
+                <label class="pill"><input type="radio" name="nvcat" value="roupas" checked><span>Roupas</span></label>
+                <label class="pill"><input type="radio" name="nvcat" value="tenis"><span>Tênis</span></label>
+                <label class="pill"><input type="radio" name="nvcat" value="acessorios"><span>Acessórios</span></label>
+              </div>
+            </div>
+            <div class="nvs">
+              <h4><span>5</span>Tamanhos que tem</h4>
+              <div class="pills" id="nv-sizes"></div>
+              <button type="button" class="rm" id="nv-all" style="margin-top:8px">Marcar todos</button>
+            </div>
+            <p class="hint" id="nv-hint" aria-live="polite"></p>
+            <button type="submit" class="btn btn-gold btn-big" id="nv-pub" disabled>Publicar no site</button>
+          </form>
+          <aside class="nv-side" aria-label="Prévia">
+            <p class="adm-p" style="margin:0 0 12px">Assim vai aparecer no site:</p>
+            <div id="nv-preview"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="adm-done" hidden class="adm-center">
+        <h3 class="adm-h">Peça publicada!</h3>
+        <p class="adm-p" id="done-txt"></p>
+        <p style="margin-top:26px"><button type="button" class="btn btn-gold" id="done-see" style="width:100%">Ver no site</button></p>
+        <p style="margin-top:12px"><button type="button" class="btn btn-outline" id="done-more" style="width:100%">Publicar outra peça</button></p>
+        <p class="res-note">Demonstração: a peça aparece no site só enquanto esta página estiver aberta. Na versão final, ela fica guardada de verdade.</p>
+      </section>
+
+    </div>
+  </div>
+</div>
 
 <!-- ============ PRODUTO ============ -->
 <div class="layer" id="layer-product" role="dialog" aria-modal="true" aria-labelledby="pm-title" hidden>
@@ -500,15 +655,19 @@
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   var money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   function fmt(n) { return money.format(n); }
-  var FEE = 10;
+  var ZONES = { centro: { label: 'Centro e arredores', fee: 8 }, proximos: { label: 'Bairros próximos', fee: 12 }, afastados: { label: 'Bairros mais afastados', fee: 18 } };
+  var FREE_OVER = 500;
 
   /* ---------- estado ---------- */
   var cart = [];                       // { id, name, price, size, qty, img }
-  var recv = 'retirada', pay = 'whatsapp', buyer = '';
+  var recv = 'retirada', pay = 'whatsapp', buyer = '', zone = '';
   function lineKey(l) { return l.id + '|' + l.size; }
   function count() { return cart.reduce(function (a, l) { return a + l.qty; }, 0); }
   function subtotal() { return cart.reduce(function (a, l) { return a + l.qty * l.price; }, 0); }
-  function delivery() { return recv === 'entrega' && cart.length ? FEE : 0; }
+  function delivery() {
+    if (recv !== 'entrega' || !cart.length || !zone) return 0;
+    return subtotal() >= FREE_OVER ? 0 : ZONES[zone].fee;
+  }
   function total() { return subtotal() + delivery(); }
 
   /* ---------- camadas ---------- */
@@ -665,7 +824,8 @@
     var opts =
       '<fieldset class="opt"><legend>Como você quer receber?</legend>' +
       '<label><input type="radio" name="recv" value="retirada"' + (recv === 'retirada' ? ' checked' : '') + '><span>Retirar na loja<span class="sm">R. Barão do Rio Branco, 318</span></span><span class="push">Grátis</span></label>' +
-      '<label><input type="radio" name="recv" value="entrega"' + (recv === 'entrega' ? ' checked' : '') + '><span>Entrega em Rondonópolis<span class="sm">Valor de exemplo</span></span><span class="push">' + fmt(FEE) + '</span></label></fieldset>' +
+      '<label><input type="radio" name="recv" value="entrega"' + (recv === 'entrega' ? ' checked' : '') + '><span>Entrega em Rondonópolis<span class="sm">Escolha a região abaixo</span></span><span class="push">a partir de ' + fmt(ZONES.centro.fee) + '</span></label>' +
+      (recv === 'entrega' ? '<div class="nm" style="margin-top:12px"><label for="zone">Região da entrega</label><select id="zone"><option value="">Escolha a região</option>' + Object.keys(ZONES).map(function (k) { return '<option value="' + k + '"' + (zone === k ? ' selected' : '') + '>' + ZONES[k].label + ' (' + fmt(ZONES[k].fee) + ')</option>'; }).join('') + '</select><p class="zone-note">Valores de exemplo. A loja define os bairros e as taxas. Frete grátis em compras acima de ' + fmt(FREE_OVER) + ' (exemplo).</p><p class="hint" id="zone-hint" aria-live="polite"></p></div>' : '') + '</fieldset>' +
       '<fieldset class="opt"><legend>Como você quer pagar?</legend>' +
       '<label><input type="radio" name="pay" value="whatsapp"' + (pay === 'whatsapp' ? ' checked' : '') + '><span>Combinar pelo WhatsApp<span class="sm">Você envia o pedido e a loja confirma</span></span></label>' +
       '<label><input type="radio" name="pay" value="pix"' + (pay === 'pix' ? ' checked' : '') + '><span>Pix<span class="sm">Pague na hora, pelo celular</span></span></label>' +
@@ -674,7 +834,7 @@
     body.innerHTML = items + opts;
     foot.hidden = false;
     $('#t-sub').textContent = fmt(subtotal());
-    $('#t-del').textContent = delivery() ? fmt(delivery()) : 'Grátis';
+    $('#t-del').textContent = (recv === 'entrega' && !zone) ? 'Escolha a região' : (delivery() ? fmt(delivery()) : 'Grátis');
     $('#t-total').textContent = fmt(total());
   }
   $('#cart-body').addEventListener('click', function (e) {
@@ -696,6 +856,7 @@
   });
   $('#cart-body').addEventListener('change', function (e) {
     if (e.target.name === 'recv') { recv = e.target.value; renderCart(); }
+    if (e.target.id === 'zone') { zone = e.target.value; var yy = $('#cart-body').scrollTop; renderCart(); $('#cart-body').scrollTop = yy; }
     if (e.target.name === 'pay') { pay = e.target.value; }
   });
   $('#cart-body').addEventListener('input', function (e) { if (e.target.id === 'buyer') buyer = e.target.value; });
@@ -708,7 +869,7 @@
   function orderText() {
     var lines = cart.map(function (l) { return '• ' + l.qty + 'x ' + l.name + ' (' + l.size + '), ' + fmt(l.qty * l.price); });
     return 'Olá! Quero fazer um pedido pelo site:\n' + lines.join('\n') + '\n\nTotal: ' + fmt(total()) +
-      '\nRecebimento: ' + (recv === 'entrega' ? 'entrega em Rondonópolis' : 'retirar na loja') +
+      '\nRecebimento: ' + (recv === 'entrega' ? 'entrega em Rondonópolis (' + ZONES[zone].label + ')' : 'retirar na loja') +
       '\nPagamento: ' + ({ whatsapp: 'combinar pelo WhatsApp', pix: 'Pix', cartao: 'cartão de crédito' })[pay] +
       (buyer.trim() ? '\nNome: ' + buyer.trim() : '');
   }
@@ -739,6 +900,11 @@
     openLayer($('#layer-result'), $('#checkout'));
   }
   $('#checkout').addEventListener('click', function () {
+    if (recv === 'entrega' && !zone) {
+      var zh = $('#zone-hint'); if (zh) zh.textContent = 'Escolha a região para calcular a entrega.';
+      var zs = $('#zone'); if (zs) zs.focus();
+      return;
+    }
     var cartLayer = $('#layer-cart');
     closeLayer(cartLayer, true);
     showResult(pay);
@@ -759,26 +925,215 @@
     openProduct(o.closest('.card'), o);
   });
 
+  /* ---------- catálogo em memória ---------- */
+  var grid = $('#grid');
+  var products = [];
+  var seq = 0;
+  function allCards() { return $$('.card', grid); }
+  function cardOf(id) { return grid.querySelector('.card[data-id="' + id + '"]'); }
+  function escA(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  allCards().forEach(function (card) {
+    var pimg = $('.pimg', card), fg = $('img.fg', card), tg = $('.tag', card);
+    products.push({
+      id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), price: parseFloat(card.getAttribute('data-price')),
+      cat: card.getAttribute('data-cat'), sizes: card.getAttribute('data-sizes').split(','), img: fg.getAttribute('src'),
+      fit: pimg.getAttribute('data-fit') || '', top: pimg.hasAttribute('data-top'), tag: tg ? tg.textContent : '', soldout: false, hidden: false
+    });
+  });
+  function cardInner(p, preview) {
+    var imgs = '';
+    if (p.img) {
+      if (p.fit === 'contain') imgs += '<img class="bg" src="' + p.img + '" alt="" aria-hidden="true">';
+      imgs += '<img class="fg" src="' + p.img + '" alt="' + escA(p.name) + '">';
+    } else { imgs = '<span class="nv-empty">A foto aparece aqui</span>'; }
+    var tagText = p.soldout ? 'Esgotado' : (p.tag || '');
+    return (tagText ? '<span class="tag' + (p.soldout ? ' dark' : '') + '">' + escA(tagText) + '</span>' : '') +
+      '<button type="button" class="pimg"' + (preview ? ' tabindex="-1"' : ' data-open') + (p.fit === 'contain' ? ' data-fit="contain"' : '') + (p.top ? ' data-top' : '') + ' aria-label="Ver ' + escA(p.name) + '">' + imgs + '</button>' +
+      '<h3>' + escA(p.name || 'Nome da peça') + '</h3><p class="price">' + fmt(p.price || 0) + '</p>' +
+      '<button type="button" class="btn btn-outline"' + (preview ? ' tabindex="-1"' : ' data-open') + '>Escolher tamanho</button>';
+  }
+  function makeCard(p) {
+    var art = document.createElement('article');
+    art.className = 'card';
+    art.setAttribute('data-id', p.id); art.setAttribute('data-name', p.name); art.setAttribute('data-price', p.price);
+    art.setAttribute('data-cat', p.cat); art.setAttribute('data-sizes', p.sizes.join(','));
+    art.innerHTML = cardInner(p, false);
+    return art;
+  }
+  function syncCard(p) {
+    var card = cardOf(p.id); if (!card) return;
+    card.setAttribute('data-price', p.price);
+    $('.price', card).textContent = fmt(p.price);
+    card.classList.toggle('soldout', !!p.soldout);
+    var tagEl = $('.tag', card), text = p.soldout ? 'Esgotado' : (p.tag || '');
+    if (text) {
+      if (!tagEl) { tagEl = document.createElement('span'); tagEl.className = 'tag'; card.insertBefore(tagEl, card.firstChild); }
+      tagEl.textContent = text; tagEl.classList.toggle('dark', !!p.soldout);
+    } else if (tagEl) { tagEl.remove(); }
+    $$('[data-open]', card).forEach(function (b) { b.disabled = !!p.soldout; });
+    $('.btn-outline', card).textContent = p.soldout ? 'Esgotado' : 'Escolher tamanho';
+  }
+
   /* ---------- filtro ---------- */
-  var cards = $$('.card');
+  var filter = 'todos';
   var chips = $$('.chip');
   var batchTriggers = [];
+  function applyFilter() {
+    var anyAcc = products.some(function (p) { return p.cat === 'acessorios' && !p.hidden; });
+    $('[data-filter="acessorios"]').hidden = !anyAcc;
+    if (!anyAcc && filter === 'acessorios') filter = 'todos';
+    var n = 0;
+    products.forEach(function (p) {
+      var card = cardOf(p.id); if (!card) return;
+      var ok = !p.hidden && (filter === 'todos' || p.cat === filter);
+      card.hidden = !ok; if (ok) n++;
+    });
+    $('#count-note').textContent = n + (n === 1 ? ' peça' : ' peças');
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-filter') === filter ? 'true' : 'false'); });
+  }
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
-      var f = chip.getAttribute('data-filter');
-      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
-      var shown = [];
-      cards.forEach(function (card) {
-        var ok = f === 'todos' || card.getAttribute('data-cat') === f;
-        card.hidden = !ok; if (ok) shown.push(card);
-      });
-      $('#count-note').textContent = shown.length + (shown.length === 1 ? ' peça' : ' peças');
+      filter = chip.getAttribute('data-filter'); applyFilter();
       if (motion) {
         batchTriggers.forEach(function (t) { t.kill(); }); batchTriggers = [];
+        var shown = allCards().filter(function (c) { return !c.hidden; });
         gsap.fromTo(shown, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform' });
       }
     });
   });
+
+  /* ---------- área da loja (demonstração) ---------- */
+  var admin = { in: false }, editing = null, nv = null, lastNew = null;
+  var VIEWS = ['adm-login', 'adm-home', 'adm-new', 'adm-done'];
+  function showView(id) {
+    VIEWS.forEach(function (v) { $('#' + v).hidden = v !== id; });
+    $('#adm-logout').hidden = id === 'adm-login';
+    $('.adm-body').scrollTop = 0;
+  }
+  function maskMoney(inp) {
+    var d = inp.value.replace(/\D/g, '').slice(0, 7);
+    inp.value = d ? fmt(parseInt(d, 10) / 100) : '';
+    return d ? parseInt(d, 10) / 100 : 0;
+  }
+  function renderList() {
+    $('#plist').innerHTML = products.map(function (p) {
+      var status = p.hidden ? 'Escondida no site' : (p.soldout ? 'Esgotada' : 'Visível no site');
+      var priceBox = editing === p.id
+        ? '<input class="pe" inputmode="numeric" aria-label="Novo preço" value="' + escA(fmt(p.price)) + '"><button type="button" data-act="save">Salvar</button>'
+        : '<button type="button" data-act="price">Preço</button>';
+      return '<li class="prow' + (p.hidden ? ' off' : '') + '" data-id="' + p.id + '"><img src="' + p.img + '" alt="">' +
+        '<div class="pinfo"><b>' + escA(p.name) + '</b><span>' + fmt(p.price) + '</span><em>' + status + '</em></div>' +
+        '<div class="pact">' + priceBox +
+        '<button type="button" data-act="sold">' + (p.soldout ? 'Voltou' : 'Esgotou') + '</button>' +
+        '<button type="button" data-act="hide">' + (p.hidden ? 'Mostrar' : 'Esconder') + '</button></div></li>';
+    }).join('');
+  }
+  $('#plist').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var row = b.closest('.prow'), id = row.getAttribute('data-id'), p = null;
+    products.forEach(function (x) { if (x.id === id) p = x; });
+    if (!p) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'price') { editing = p.id; renderList(); var pe = $('.pe', $('#plist')); if (pe) { pe.focus(); pe.select(); } return; }
+    if (act === 'save') {
+      var v = maskMoney($('.pe', row));
+      if (v > 0) { p.price = v; editing = null; syncCard(p); toast('Preço atualizado: ' + p.name + ', ' + fmt(v) + '.'); }
+      renderList(); return;
+    }
+    if (act === 'sold') { p.soldout = !p.soldout; syncCard(p); }
+    if (act === 'hide') { p.hidden = !p.hidden; }
+    applyFilter(); renderList();
+  });
+  $('#plist').addEventListener('input', function (e) { if (e.target.classList.contains('pe')) maskMoney(e.target); });
+
+  function sizeList(cat) { return cat === 'tenis' ? ['34', '35', '36', '37', '38', '39', '40', '41'] : (cat === 'acessorios' ? ['Único'] : ['P', 'M', 'G', 'GG']); }
+  function renderSizes() {
+    $('#nv-sizes').innerHTML = sizeList(nv.cat).map(function (s) { return '<label class="pill"><input type="checkbox" value="' + s + '"' + (s === 'Único' ? ' checked' : '') + '><span>' + s + '</span></label>'; }).join('');
+    $('#nv-all').hidden = nv.cat === 'acessorios';
+  }
+  function updateNew() {
+    var name = $('#nv-name').value.trim();
+    var d = $('#nv-price').value.replace(/\D/g, ''), price = d ? parseInt(d, 10) / 100 : 0;
+    var sizes = $$('#nv-sizes input:checked').map(function (i) { return i.value; });
+    var cat = $('input[name="nvcat"]:checked').value;
+    var miss = [];
+    if (!nv.img) miss.push('a foto'); if (!name) miss.push('o nome'); if (!price) miss.push('o preço'); if (!sizes.length) miss.push('os tamanhos');
+    $('#nv-hint').textContent = miss.length ? 'Falta: ' + miss.join(', ') + '.' : '';
+    $('#nv-pub').disabled = miss.length > 0;
+    var pv = document.createElement('article'); pv.className = 'card pv';
+    pv.innerHTML = cardInner({ name: name, price: price, img: nv.img, fit: nv.fit, tag: 'Novo', top: false, soldout: false }, true);
+    var box = $('#nv-preview'); box.innerHTML = ''; box.appendChild(pv);
+    return { name: name, price: price, sizes: sizes, cat: cat };
+  }
+  function setPhoto(src) {
+    var im = new Image();
+    im.onload = function () {
+      nv.img = src; nv.fit = (im.naturalWidth / im.naturalHeight > 1.15) ? 'contain' : '';
+      var pv = $('#nv-prev'); pv.src = src; pv.hidden = false;
+      $('#nv-drop').classList.add('has'); $('#nv-drop-b').textContent = 'Trocar foto';
+      updateNew();
+    };
+    im.src = src;
+  }
+  function openNew() {
+    nv = { img: '', fit: '', cat: 'roupas' };
+    $('#nv-form').reset();
+    var pv = $('#nv-prev'); pv.hidden = true; pv.removeAttribute('src');
+    $('#nv-drop').classList.remove('has'); $('#nv-drop-b').textContent = 'Tirar foto ou escolher da galeria';
+    renderSizes(); updateNew(); showView('adm-new');
+  }
+  $('#nv-file').addEventListener('change', function () {
+    var f = this.files && this.files[0]; if (!f) return;
+    if (!/^image\//.test(f.type)) { $('#nv-hint').textContent = 'Escolha um arquivo de imagem.'; return; }
+    setPhoto(URL.createObjectURL(f));
+  });
+  $('#nv-sample').addEventListener('click', function () { var ex = $('.ig-grid img'); if (ex) setPhoto(ex.getAttribute('src')); });
+  $('#nv-name').addEventListener('input', updateNew);
+  $('#nv-price').addEventListener('input', function () { maskMoney(this); updateNew(); });
+  $('#nv-form').addEventListener('change', function (e) {
+    if (e.target.name === 'nvcat') { nv.cat = e.target.value; renderSizes(); }
+    updateNew();
+  });
+  $('#nv-all').addEventListener('click', function () { $$('#nv-sizes input').forEach(function (i) { i.checked = true; }); updateNew(); });
+  $('#nv-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = updateNew();
+    if ($('#nv-pub').disabled) return;
+    var p = { id: 'n' + (++seq), name: f.name, price: f.price, cat: f.cat, sizes: f.sizes, img: nv.img, fit: nv.fit, top: false, tag: 'Novo', soldout: false, hidden: false };
+    products.unshift(p);
+    grid.insertBefore(makeCard(p), grid.firstChild);
+    filter = 'todos'; applyFilter();
+    lastNew = p.id;
+    $('#done-txt').textContent = f.name + ' já está no catálogo do site, por ' + fmt(f.price) + '.';
+    showView('adm-done');
+  });
+  $('#nv-back').addEventListener('click', function () { renderList(); showView('adm-home'); });
+  $('#adm-new-btn').addEventListener('click', openNew);
+  $('#done-more').addEventListener('click', openNew);
+  $('#done-see').addEventListener('click', function () {
+    closeLayer($('#layer-admin'));
+    setTimeout(function () {
+      var c = cardOf(lastNew); if (!c) return;
+      document.getElementById('colecao').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+      setTimeout(function () {
+        c.classList.add('flash');
+        if (motion) gsap.fromTo(c, { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)', clearProps: 'transform' });
+        setTimeout(function () { c.classList.remove('flash'); }, 3400);
+      }, 650);
+    }, 320);
+  });
+  function openAdmin(opener) {
+    showView(admin.in ? 'adm-home' : 'adm-login');
+    if (admin.in) renderList();
+    openLayer($('#layer-admin'), opener);
+  }
+  $('#adm-open').addEventListener('click', function () { openAdmin(this); });
+  $('#adm-open-2').addEventListener('click', function () { openAdmin(this); });
+  $('#adm-form').addEventListener('submit', function (e) { e.preventDefault(); admin.in = true; renderList(); showView('adm-home'); });
+  $('#adm-logout').addEventListener('click', function () { admin.in = false; showView('adm-login'); });
+
+  applyFilter();
+  var cards = allCards();
 
   renderCart();
 
