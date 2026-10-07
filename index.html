@@ -132,14 +132,6 @@
   .card .btn-outline { margin-top: auto; width: 100%; }
   .count-note { color: var(--muted-l); font-size: 16px; }
 
-  /* ---------- como comprar ---------- */
-  .how { background: var(--char); color: #fff; }
-  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); margin-top: clamp(32px, 4vw, 56px); }
-  .step .n { font-family: var(--display); font-weight: 300; font-size: 64px; line-height: 1; color: var(--gold); }
-  .step h3 { font-family: var(--body); font-weight: 600; font-size: 22px; margin-top: 14px; letter-spacing: 0; }
-  .step p { color: var(--muted-d); margin-top: 8px; }
-  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } .step { display: grid; grid-template-columns: 64px 1fr; column-gap: 18px; } .step .n { grid-row: 1 / 3; } .step h3 { margin-top: 4px; } }
-
   /* ---------- instagram ---------- */
   .ig-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: clamp(24px, 3vw, 40px); }
   .ig-grid a { display: block; aspect-ratio: 1 / 1.18; overflow: hidden; background: var(--char); }
@@ -333,7 +325,6 @@
   <a class="brand" href="#inicio" aria-label="FITLIVE Fashion Wear, início"><b>FITLIVE</b><i>Fashion Wear</i></a>
   <div class="top-actions">
     <a class="toplink" href="#colecao">Coleção</a>
-    <a class="toplink" href="#como">Como comprar</a>
     <a class="toplink" href="#contato">Onde estamos</a>
     <button type="button" class="cart-btn" id="adm-open" aria-label="Área da loja"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.4 7-5.4s6.2 1.8 7 5.4"/></svg><span class="t">Área da loja</span></button>
     <button type="button" class="cart-btn" id="cart-btn" aria-label="Abrir a sacola">
@@ -440,19 +431,6 @@
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
     </div>
-  </div>
-</section>
-
-<!-- ============ COMO COMPRAR ============ -->
-<section class="sec how on-dark" id="como">
-  <div class="in">
-    <h2 class="title">Como comprar</h2>
-    <span class="title-rule" aria-hidden="true" style="background:var(--gold)"></span>
-    <ol class="steps">
-      <li class="step"><span class="n">1</span><h3>Escolha as peças</h3><p>Toque na peça que gostou, escolha o tamanho e adicione à sacola.</p></li>
-      <li class="step"><span class="n">2</span><h3>Monte a sacola</h3><p>Confira os itens e escolha se prefere retirar na loja ou receber em casa.</p></li>
-      <li class="step"><span class="n">3</span><h3>Finalize</h3><p>Combine tudo pelo WhatsApp ou pague na hora, com Pix ou cartão.</p></li>
-    </ol>
   </div>
 </section>
 
@@ -1160,12 +1138,6 @@
   batchTriggers = ScrollTrigger.batch(cards, {
     start: 'top 92%', once: true,
     onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.65, stagger: 0.08, ease: 'power2.out', clearProps: 'transform' }); }
-  });
-
-  gsap.set('.step', { opacity: 0, y: 26 });
-  ScrollTrigger.batch('.step', {
-    start: 'top 90%', once: true,
-    onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power2.out' }); }
   });
 
   gsap.set('.ig-grid a', { opacity: 0, scale: 0.92 });
