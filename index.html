@@ -91,9 +91,9 @@
   .hero p.sub { margin-top: 26px; max-width: 30em; font-size: clamp(18px, 1.5vw, 21px); color: var(--muted-d); }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
   .collage { position: relative; width: 100%; max-width: 540px; margin-left: auto; aspect-ratio: 540 / 600; }
-  .collage .frame { position: absolute; left: 26px; top: 22px; width: 64%; aspect-ratio: 502 / 742; border: 1px solid var(--gold); }
+  .collage .frame { position: absolute; left: 26px; top: 22px; width: 64%; aspect-ratio: 487 / 742; border: 1px solid var(--gold); }
   .collage figure { position: absolute; overflow: hidden; background: var(--char-deep); }
-  .collage .a { left: 0; top: 0; width: 64%; aspect-ratio: 502 / 742; }
+  .collage .a { left: 0; top: 0; width: 64%; aspect-ratio: 487 / 742; }
   .collage .b { right: 0; bottom: 0; width: 44%; aspect-ratio: 472 / 739; border: 6px solid var(--char); box-shadow: 0 24px 40px -18px rgba(0,0,0,.6); }
   .collage img { width: 100%; height: 100%; object-fit: cover; }
   @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .collage { margin: 8px auto 0; max-width: 460px; } }
@@ -183,7 +183,8 @@
   @media (max-width: 760px) {
     #layer-product { align-items: center; padding: 60px 12px calc(16px + var(--ios-bar, 0px)); }
     #layer-product .panel { width: 100%; max-height: 100%; display: flex; flex-direction: column; border-radius: 18px; --from: translateY(30px); }
-    .pm-img { flex: none; aspect-ratio: auto; height: 32vh; min-height: 180px; max-height: 300px; }
+    .pm-img { flex: none; aspect-ratio: auto; height: 38vh; min-height: 200px; max-height: 360px; }
+    @media (max-height: 700px) { .pm-img { height: 30vh; min-height: 170px; } }
     .pm-info { flex: none; position: relative; z-index: 1; padding: 20px 20px 0; }
     .pm-info h2 { font-size: 28px; }
     .pm-info .lbl { margin: 18px 0 8px; }
@@ -364,7 +365,7 @@
     </div>
     <div class="collage" aria-hidden="false">
       <div class="frame" aria-hidden="true"></div>
-      <figure class="a"><img src="img/hero-a.jpg" width="502" height="742" alt="Modelo vestindo uma regata azul da coleção, ao ar livre."></figure>
+      <figure class="a"><img src="img/hero-a.jpg" width="487" height="742" alt="Modelo vestindo uma regata azul da coleção, ao ar livre."></figure>
       <figure class="b"><img src="img/hero-b.jpg" width="472" height="739" alt="Modelo vestindo um cropped bege com legging preta."></figure>
     </div>
   </div>
@@ -401,7 +402,7 @@
 
     <div class="grid" id="grid">
       <article class="card" data-id="regata" data-name="Regata Colcci Sport" data-price="169.9" data-cat="roupas" data-sizes="P,M,G,GG">
-        <button type="button" class="pimg" data-open data-top aria-label="Ver Regata Colcci Sport"><img class="fg" src="img/hero-a.jpg" width="502" height="742" alt="Regata azul Colcci Sport"></button>
+        <button type="button" class="pimg" data-open data-top aria-label="Ver Regata Colcci Sport"><img class="fg" src="img/hero-a.jpg" width="487" height="742" alt="Regata azul Colcci Sport"></button>
         <h3>Regata Colcci Sport</h3><p class="price">R$ 169,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
@@ -719,10 +720,9 @@
   function imgsHtml(card) {
     var pimg = $('.pimg', card);
     var fg = $('img.fg', card);
-    var html = '';
-    if (pimg.getAttribute('data-fit') === 'contain') html += '<img class="bg" src="' + fg.getAttribute('src') + '" alt="" aria-hidden="true">';
+    var html = '<img class="bg" src="' + fg.getAttribute('src') + '" alt="" aria-hidden="true">';
     html += '<img class="fg" src="' + fg.getAttribute('src') + '" alt="' + (fg.getAttribute('alt') || '') + '">';
-    return { html: html, fit: pimg.getAttribute('data-fit') || '', top: pimg.hasAttribute('data-top') };
+    return { html: html, fit: 'contain', top: false };
   }
   function openProduct(card, opener) {
     cur = { card: card, id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), price: parseFloat(card.getAttribute('data-price')), size: null, qty: 1 };
