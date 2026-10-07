@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FITLIVE Fashion Wear | Rondonópolis</title>
+<meta name="description" content="FITLIVE Fashion Wear: roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e finalize pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --char: #353334;
+    --char-deep: #262425;
+    --paper: #F6F5F3;
+    --white: #FFFFFF;
+    --ink: #262425;
+    --muted-l: #5F5B59;
+    --muted-d: #B9B3AD;
+    --gold: #C2A878;
+    --gold-deep: #8A7140;
+    --wine: #6B1E2E;
+    --line-l: rgba(38, 36, 37, .16);
+    --line-d: rgba(255, 255, 255, .2);
+    --display: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    --body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --char: #353334; --char-deep: #262425; --paper: #F6F5F3; --white: #FFFFFF; --ink: #262425;
+      --muted-l: #5F5B59; --muted-d: #B9B3AD; --gold: #C2A878; --gold-deep: #8A7140; --wine: #6B1E2E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --char: #353334; --char-deep: #262425; --paper: #F6F5F3; --white: #FFFFFF; --ink: #262425;
+    --muted-l: #5F5B59; --muted-d: #B9B3AD; --gold: #C2A878; --gold-deep: #8A7140; --wine: #6B1E2E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  :root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(84px + env(safe-area-inset-top, 0px)); -webkit-text-size-adjust: 100%; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body.locked { overflow: hidden; }
+  img { display: block; max-width: 100%; }
+  p, h1, h2, h3, ul, ol, figure, dl, dd { margin: 0; padding: 0; }
+  ul, ol { list-style: none; }
+  a { color: inherit; }
+  button { font-family: inherit; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 300; letter-spacing: -0.005em; line-height: 1.08; }
+  :focus-visible { outline: 3px solid var(--gold-deep); outline-offset: 3px; }
+  .on-dark :focus-visible, .dark-ui :focus-visible { outline-color: var(--gold); }
+
+  .in { max-width: 1240px; margin: 0 auto; padding-left: clamp(20px, 4vw, 48px); padding-right: clamp(20px, 4vw, 48px); }
+  .sec { padding-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(64px, 8vw, 112px); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 30px;
+    border-radius: 999px; border: 1px solid transparent; font-size: 17px; font-weight: 600; text-decoration: none; cursor: pointer; white-space: nowrap;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .btn-gold { background: var(--gold); color: var(--char-deep); }
+  .btn-gold:hover { background: #D3BC8E; transform: translateY(-2px); }
+  .btn-dark { background: var(--char); color: #fff; }
+  .btn-dark:hover { background: var(--char-deep); transform: translateY(-2px); }
+  .btn-line { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+  .btn-line:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); min-height: 48px; padding: 0 20px; font-size: 16px; }
+  .btn-outline:hover { background: var(--ink); color: #fff; }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; }
+
+  /* ---------- aviso + cabeçalho ---------- */
+  .notice { background: var(--char-deep); color: var(--muted-d); font-size: 14px; text-align: center; padding: 8px 16px; line-height: 1.4; }
+  .top { position: sticky; top: 0; z-index: 40; background: var(--char-deep); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 12px clamp(16px, 4vw, 48px); border-bottom: 1px solid rgba(255,255,255,.08); }
+  .brand { text-decoration: none; display: block; line-height: 1; }
+  .brand b { display: block; font-family: var(--display); font-weight: 300; font-size: 28px; letter-spacing: .3em; padding-left: .3em; }
+  .brand i { display: block; font-style: normal; font-family: var(--display); font-weight: 300; font-size: 11px; letter-spacing: .42em; color: var(--gold); margin-top: 3px; text-align: center; }
+  .top-actions { display: flex; align-items: center; gap: 22px; }
+  .top-actions a.toplink { text-decoration: none; font-size: 16px; color: var(--muted-d); }
+  .top-actions a.toplink:hover { color: #fff; }
+  .cart-btn { position: relative; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px; border-radius: 999px; background: transparent; border: 1px solid rgba(255,255,255,.4); color: #fff; font-size: 16px; font-weight: 500; cursor: pointer; transition: border-color .2s ease; }
+  .cart-btn:hover { border-color: var(--gold); }
+  .cart-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .cart-count { position: absolute; top: -7px; right: -5px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--gold); color: var(--char-deep); font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 720px) { .top-actions a.toplink { display: none; } .cart-btn span.t { display: none; } .cart-btn { padding: 0 14px; } .brand b { font-size: 24px; } }
+
+  /* ---------- topo ---------- */
+  .hero { background: var(--char); color: #fff; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(32px, 5vw, 80px); align-items: center; padding-top: clamp(40px, 6vw, 88px); padding-bottom: clamp(48px, 6vw, 96px); }
+  .hero h1 { font-size: clamp(42px, 5.6vw, 80px); line-height: 1.02; }
+  .hero h1 .ln { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+  .hero h1 .ln > span { display: block; }
+  .hero p.sub { margin-top: 26px; max-width: 30em; font-size: clamp(18px, 1.5vw, 21px); color: var(--muted-d); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .collage { position: relative; width: 100%; max-width: 540px; margin-left: auto; aspect-ratio: 540 / 600; }
+  .collage .frame { position: absolute; left: 26px; top: 22px; width: 64%; aspect-ratio: 502 / 742; border: 1px solid var(--gold); }
+  .collage figure { position: absolute; overflow: hidden; background: var(--char-deep); }
+  .collage .a { left: 0; top: 0; width: 64%; aspect-ratio: 502 / 742; }
+  .collage .b { right: 0; bottom: 0; width: 44%; aspect-ratio: 472 / 739; border: 6px solid var(--char); box-shadow: 0 24px 40px -18px rgba(0,0,0,.6); }
+  .collage img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .collage { margin: 8px auto 0; max-width: 460px; } }
+
+  .info { background: var(--char-deep); color: #fff; }
+  .info ul { display: flex; flex-wrap: wrap; justify-content: center; padding: 18px 0; font-size: 16px; }
+  .info li { padding: 4px 28px; border-right: 1px solid var(--line-d); }
+  .info li:last-child { border-right: 0; }
+  @media (max-width: 720px) { .info ul { flex-direction: column; align-items: center; gap: 2px; } .info li { border-right: 0; padding: 2px 0; } }
+
+  /* ---------- coleção ---------- */
+  .head-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 22px; margin-bottom: clamp(28px, 4vw, 48px); }
+  h2.title { font-size: clamp(38px, 4.6vw, 62px); }
+  .title-rule { display: block; width: 64px; height: 2px; background: var(--gold-deep); margin-top: 16px; transform-origin: left center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { min-height: 48px; padding: 0 24px; border-radius: 999px; background: transparent; border: 1px solid var(--line-l); color: var(--ink); font-size: 17px; font-weight: 500; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+  .chip:hover { border-color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--char); border-color: var(--char); color: #fff; }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+  .card { display: flex; flex-direction: column; }
+  .pimg { position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--char); aspect-ratio: 4 / 5; overflow: hidden; cursor: pointer; }
+  .pimg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .pimg img.bg { filter: blur(18px) brightness(.85); transform: scale(1.2); }
+  .pimg[data-fit="contain"] img.fg { object-fit: contain; }
+  .pimg[data-top] img.fg, .pm-img[data-top] img.fg { object-position: 50% 0; }
+  .card:hover .pimg img.fg:not(.bg) { transform: scale(1.04); }
+  .tag { position: absolute; left: 0; top: 14px; background: var(--wine); color: #fff; font-size: 14px; font-weight: 500; padding: 5px 14px 5px 12px; z-index: 2; }
+  .card h3 { font-family: var(--body); font-weight: 600; font-size: 18px; line-height: 1.3; margin-top: 16px; letter-spacing: 0; }
+  .card .price { font-size: 19px; color: var(--gold-deep); font-weight: 600; margin: 4px 0 14px; }
+  .card .btn-outline { margin-top: auto; width: 100%; }
+  .count-note { color: var(--muted-l); font-size: 16px; }
+
+  /* ---------- como comprar ---------- */
+  .how { background: var(--char); color: #fff; }
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); margin-top: clamp(32px, 4vw, 56px); }
+  .step .n { font-family: var(--display); font-weight: 300; font-size: 64px; line-height: 1; color: var(--gold); }
+  .step h3 { font-family: var(--body); font-weight: 600; font-size: 22px; margin-top: 14px; letter-spacing: 0; }
+  .step p { color: var(--muted-d); margin-top: 8px; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } .step { display: grid; grid-template-columns: 64px 1fr; column-gap: 18px; } .step .n { grid-row: 1 / 3; } .step h3 { margin-top: 4px; } }
+
+  /* ---------- instagram ---------- */
+  .ig-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: clamp(24px, 3vw, 40px); }
+  .ig-grid a { display: block; aspect-ratio: 1 / 1.18; overflow: hidden; background: var(--char); }
+  .ig-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .ig-grid a:hover img { transform: scale(1.07); }
+  @media (max-width: 880px) { .ig-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  /* ---------- rodapé ---------- */
+  .foot { background: var(--char-deep); color: #fff; }
+  .foot-grid { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); padding-top: 56px; padding-bottom: 44px; align-items: start; }
+  .foot-logo { width: 110px; height: 110px; }
+  .foot h3 { font-family: var(--body); font-weight: 600; font-size: 16px; color: var(--gold); letter-spacing: 0; margin-bottom: 10px; }
+  .foot p, .foot li { color: var(--muted-d); font-size: 17px; }
+  .foot a { color: #fff; }
+  .foot-note { border-top: 1px solid var(--line-d); padding: 18px 0 26px; color: var(--muted-d); font-size: 14px; }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- barra de sacola (celular) ---------- */
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: var(--char-deep); border-top: 1px solid rgba(255,255,255,.12); display: none; }
+  .bar button { width: 100%; min-height: 54px; border-radius: 999px; border: 0; background: var(--gold); color: var(--char-deep); font-size: 17px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; cursor: pointer; }
+  @media (max-width: 880px) { .bar:not([hidden]) { display: block; } body.has-bar { padding-bottom: 80px; } }
+
+  /* ---------- camadas (produto, sacola, resultado) ---------- */
+  .layer { position: fixed; inset: 0; z-index: 60; display: flex; }
+  .layer .backdrop { position: absolute; inset: 0; background: rgba(20, 18, 19, .62); opacity: 0; transition: opacity .26s ease; }
+  .layer.open .backdrop { opacity: 1; }
+  .panel { position: relative; background: var(--paper); color: var(--ink); opacity: 0; transform: var(--from, none); transition: opacity .26s ease, transform .3s ease; max-height: 100%; overflow: auto; overscroll-behavior: contain; }
+  .layer.open .panel { opacity: 1; transform: none; }
+  .x { position: absolute; top: 12px; right: 12px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: var(--ink); cursor: pointer; z-index: 3; display: flex; align-items: center; justify-content: center; }
+  .x svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; }
+
+  #layer-product, #layer-result { align-items: center; justify-content: center; padding: 20px; }
+  #layer-product .panel { width: min(980px, 100%); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); --from: translateY(18px) scale(.98); }
+  #layer-result .panel { width: min(580px, 100%); padding: clamp(24px, 4vw, 40px); --from: translateY(18px) scale(.98); }
+  .pm-img { position: relative; background: var(--char); overflow: hidden; min-height: 440px; }
+  .pm-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; }
+  .pm-img img.bg { filter: blur(18px) brightness(.85); transform: scale(1.2); }
+  .pm-img[data-fit="contain"] img.fg { object-fit: contain; }
+  .pm-info { padding: clamp(24px, 3.4vw, 44px); display: flex; flex-direction: column; }
+  .pm-info h2 { font-size: clamp(30px, 3.2vw, 42px); padding-right: 40px; }
+  .pm-price { font-size: 26px; font-weight: 600; color: var(--gold-deep); margin-top: 10px; }
+  .pm-info .lbl { font-weight: 600; margin: 26px 0 10px; font-size: 17px; }
+  .sizes { display: flex; flex-wrap: wrap; gap: 10px; }
+  .size { min-width: 56px; min-height: 52px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line-l); background: var(--white); color: var(--ink); font-size: 17px; font-weight: 500; cursor: pointer; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+  .size:hover { border-color: var(--ink); }
+  .size[aria-pressed="true"] { background: var(--char); border-color: var(--char); color: #fff; }
+  .hint { min-height: 24px; margin-top: 10px; font-size: 15px; color: var(--wine); font-weight: 500; }
+  .stepper { display: inline-flex; align-items: center; border: 1px solid var(--line-l); border-radius: 999px; background: var(--white); }
+  .stepper button { width: 52px; height: 52px; border: 0; background: transparent; font-size: 24px; cursor: pointer; border-radius: 50%; color: var(--ink); }
+  .stepper button:hover { background: rgba(38,36,37,.07); }
+  .stepper output { min-width: 40px; text-align: center; font-size: 18px; font-weight: 600; }
+  .pm-info .stepper { align-self: flex-start; }
+  .pm-add { margin-top: 26px; width: 100%; }
+  .pm-note { margin-top: 14px; font-size: 15px; color: var(--muted-l); }
+  @keyframes shake { 0%, 100% { transform: none; } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .shake { animation: shake .35s ease; }
+  @media (max-width: 760px) {
+    #layer-product { align-items: flex-end; padding: 0; }
+    #layer-product .panel { width: 100%; max-height: 94svh; grid-template-columns: 1fr; border-radius: 20px 20px 0 0; --from: translateY(40px); }
+    .pm-img { aspect-ratio: 1 / 1; min-height: 0; }
+    #layer-result { padding: 12px; }
+  }
+
+  #layer-cart { justify-content: flex-end; }
+  #layer-cart .panel { width: min(480px, 100%); height: 100%; display: flex; flex-direction: column; --from: translateX(40px); }
+  .cart-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px 16px; border-bottom: 1px solid var(--line-l); }
+  .cart-head h2 { font-size: 34px; }
+  .cart-head .x { position: static; background: rgba(38,36,37,.07); }
+  .cart-body { flex: 1; overflow: auto; padding: 8px 24px 20px; }
+  .empty { text-align: center; padding: 56px 12px; color: var(--muted-l); }
+  .empty p { margin-bottom: 20px; }
+  .line { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line-l); }
+  .line img { width: 76px; height: 96px; object-fit: cover; background: var(--char); }
+  .line h4 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; }
+  .line .meta { color: var(--muted-l); font-size: 15px; }
+  .line .row2 { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; gap: 8px; }
+  .line .stepper button { width: 42px; height: 42px; font-size: 20px; }
+  .line .stepper output { min-width: 28px; font-size: 16px; }
+  .line .lp { font-weight: 600; }
+  .rm { background: none; border: 0; padding: 6px 0; color: var(--muted-l); text-decoration: underline; font-size: 14px; cursor: pointer; }
+  .opt { margin-top: 24px; border: 0; padding: 0; min-width: 0; }
+  .opt legend { font-weight: 600; font-size: 17px; margin-bottom: 10px; padding: 0; }
+  .opt label { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border: 1px solid var(--line-l); border-radius: 12px; background: var(--white); margin-bottom: 8px; cursor: pointer; font-size: 17px; }
+  .opt label:has(input:checked) { border-color: var(--char); background: #fff; box-shadow: inset 0 0 0 1px var(--char); }
+  .opt input { width: 20px; height: 20px; accent-color: var(--char); flex-shrink: 0; }
+  .opt .sm { display: block; font-size: 14px; color: var(--muted-l); }
+  .opt .push { margin-left: auto; font-weight: 600; }
+  .nm { margin-top: 24px; }
+  .nm label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 17px; }
+  .nm input { width: 100%; min-height: 52px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line-l); font-size: 17px; font-family: inherit; background: var(--white); color: var(--ink); }
+  .cart-foot { padding: 18px 24px calc(18px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line-l); background: var(--white); }
+  .tot { display: flex; justify-content: space-between; font-size: 16px; color: var(--muted-l); padding: 2px 0; }
+  .tot.big { font-size: 22px; color: var(--ink); font-weight: 600; padding-top: 10px; }
+  .cart-foot .btn { width: 100%; margin-top: 14px; }
+  .demo-line { margin-top: 10px; text-align: center; font-size: 13px; color: var(--muted-l); }
+
+  #layer-result h2 { font-size: 34px; padding-right: 44px; }
+  .res-sub { margin-top: 8px; color: var(--muted-l); }
+  .wa { margin-top: 20px; background: #E7F1DF; border-radius: 6px 18px 18px 18px; padding: 16px 18px; font-size: 16px; line-height: 1.5; white-space: pre-wrap; color: #1F2A1B; }
+  .pixbox { margin-top: 20px; border: 2px dashed var(--line-l); padding: 22px; text-align: center; color: var(--muted-l); }
+  .pixbox .qr { width: 132px; height: 132px; margin: 0 auto 12px; background: repeating-linear-gradient(45deg, #D8D4CF 0 8px, #EFECE8 8px 16px); }
+  .pixbox code { display: block; margin-top: 8px; font-size: 14px; }
+  .res-note { margin-top: 18px; padding: 14px 16px; background: rgba(138,113,64,.12); border-left: 3px solid var(--gold-deep); font-size: 15px; }
+  #layer-result .btn { width: 100%; margin-top: 20px; }
+
+  /* ---------- aviso rápido e item voando ---------- */
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 80; background: var(--char-deep); color: #fff; padding: 14px 22px; border-radius: 999px; font-size: 16px; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; width: max-content; max-width: 90vw; text-align: center; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  body.has-bar .toast { bottom: 96px; }
+  .fly { position: fixed; z-index: 90; object-fit: cover; border-radius: 8px; pointer-events: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notice">Protótipo de demonstração: produtos, fotos e preços são exemplos e nenhum pagamento é feito.</div>
+
+<header class="top">
+  <a class="brand" href="#inicio" aria-label="FITLIVE Fashion Wear, início"><b>FITLIVE</b><i>Fashion Wear</i></a>
+  <div class="top-actions">
+    <a class="toplink" href="#colecao">Coleção</a>
+    <a class="toplink" href="#como">Como comprar</a>
+    <a class="toplink" href="#contato">Onde estamos</a>
+    <button type="button" class="cart-btn" id="cart-btn" aria-label="Abrir a sacola">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11l-1-12z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span class="t">Sacola</span>
+      <span class="cart-count" id="cart-count" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<main id="inicio">
+
+<!-- ============ TOPO ============ -->
+<section class="hero">
+  <div class="in hero-grid">
+    <div>
+      <h1>
+        <span class="ln"><span>Vale a pena</span></span>
+        <span class="ln"><span>se vestir bem.</span></span>
+      </h1>
+      <p class="sub">Roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e finalize o pedido pelo WhatsApp ou pague online.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#colecao">Ver a coleção</a>
+        <button type="button" class="btn btn-line" data-whats="geral">Pedir pelo WhatsApp</button>
+      </div>
+    </div>
+    <div class="collage" aria-hidden="false">
+      <div class="frame" aria-hidden="true"></div>
+      <figure class="a"><img src="img/hero-a.jpg" width="502" height="742" alt="Modelo vestindo uma regata azul da coleção, ao ar livre."></figure>
+      <figure class="b"><img src="img/hero-b.jpg" width="472" height="739" alt="Modelo vestindo um cropped bege com legging preta."></figure>
+    </div>
+  </div>
+</section>
+
+<div class="info">
+  <div class="in">
+    <ul>
+      <li>R. Barão do Rio Branco, 318, Rondonópolis</li>
+      <li>Segunda a sexta, das 8h às 18h</li>
+      <li>Sábado, das 8h às 12h</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ COLEÇÃO ============ -->
+<section class="sec" id="colecao">
+  <div class="in">
+    <div class="head-row">
+      <div>
+        <h2 class="title">Coleção</h2>
+        <span class="title-rule" aria-hidden="true"></span>
+      </div>
+      <div>
+        <div class="chips" role="group" aria-label="Filtrar por categoria">
+          <button type="button" class="chip" data-filter="todos" aria-pressed="true">Todos</button>
+          <button type="button" class="chip" data-filter="roupas" aria-pressed="false">Roupas</button>
+          <button type="button" class="chip" data-filter="tenis" aria-pressed="false">Tênis</button>
+        </div>
+      </div>
+    </div>
+    <p class="count-note" id="count-note" aria-live="polite" style="margin-bottom:22px">8 peças</p>
+
+    <div class="grid" id="grid">
+      <article class="card" data-id="regata" data-name="Regata Colcci Sport" data-price="169.9" data-cat="roupas" data-sizes="P,M,G,GG">
+        <button type="button" class="pimg" data-open data-top aria-label="Ver Regata Colcci Sport"><img class="fg" src="img/hero-a.jpg" width="502" height="742" alt="Regata azul Colcci Sport"></button>
+        <h3>Regata Colcci Sport</h3><p class="price">R$ 169,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="cropped" data-name="Cropped Lança Perfume" data-price="119.9" data-cat="roupas" data-sizes="P,M,G">
+        <button type="button" class="pimg" data-open data-top aria-label="Ver Cropped Lança Perfume"><img class="fg" src="img/hero-b.jpg" width="472" height="739" alt="Cropped bege Lança Perfume"></button>
+        <h3>Cropped Lança Perfume</h3><p class="price">R$ 119,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="bordo" data-name="Conjunto top e legging bordô" data-price="259.9" data-cat="roupas" data-sizes="P,M,G,GG">
+        <button type="button" class="pimg" data-open aria-label="Ver Conjunto top e legging bordô"><img class="fg" src="img/p-bordo.jpg" width="424" height="530" alt="Conjunto fitness bordô, top e legging"></button>
+        <h3>Conjunto top e legging bordô</h3><p class="price">R$ 259,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="nikeverde" data-name="Conjunto Nike verde, camiseta e short" data-price="249.9" data-cat="roupas" data-sizes="P,M,G,GG">
+        <button type="button" class="pimg" data-open aria-label="Ver Conjunto Nike verde"><img class="fg" src="img/p-nike-verde.jpg" width="300" height="354" alt="Camiseta verde e short cinza Nike"></button>
+        <h3>Conjunto Nike verde, camiseta e short</h3><p class="price">R$ 249,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="active" data-name="Legging Active Soul" data-price="189.9" data-cat="roupas" data-sizes="P,M,G,GG">
+        <span class="tag">Lançamento</span>
+        <button type="button" class="pimg" data-open aria-label="Ver Legging Active Soul"><img class="fg" src="img/p-active-soul.jpg" width="300" height="354" alt="Legging Active Soul, lançamento"></button>
+        <h3>Legging Active Soul</h3><p class="price">R$ 189,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="skechers" data-name="Tênis Skechers rosa" data-price="459.9" data-cat="tenis" data-sizes="34,35,36,37,38,39">
+        <button type="button" class="pimg" data-open aria-label="Ver Tênis Skechers rosa"><img class="fg" src="img/p-skechers.jpg" width="300" height="292" alt="Tênis Skechers rosa sendo amarrado"></button>
+        <h3>Tênis Skechers rosa</h3><p class="price">R$ 459,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="v2k" data-name="Tênis Nike V2K Run" data-price="899.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
+        <button type="button" class="pimg" data-open data-fit="contain" aria-label="Ver Tênis Nike V2K Run"><img class="bg" src="img/p-v2k.jpg" alt="" aria-hidden="true"><img class="fg" src="img/p-v2k.jpg" width="524" height="476" alt="Tênis Nike V2K Run bege"></button>
+        <h3>Tênis Nike V2K Run</h3><p class="price">R$ 899,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="court" data-name="Tênis Nike Court Legacy Lift" data-price="649.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
+        <button type="button" class="pimg" data-open data-fit="contain" aria-label="Ver Tênis Nike Court Legacy Lift"><img class="bg" src="img/p-court.jpg" alt="" aria-hidden="true"><img class="fg" src="img/p-court.jpg" width="558" height="476" alt="Tênis Nike Court Legacy Lift branco"></button>
+        <h3>Tênis Nike Court Legacy Lift</h3><p class="price">R$ 649,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO COMPRAR ============ -->
+<section class="sec how on-dark" id="como">
+  <div class="in">
+    <h2 class="title">Como comprar</h2>
+    <span class="title-rule" aria-hidden="true" style="background:var(--gold)"></span>
+    <ol class="steps">
+      <li class="step"><span class="n">1</span><h3>Escolha as peças</h3><p>Toque na peça que gostou, escolha o tamanho e adicione à sacola.</p></li>
+      <li class="step"><span class="n">2</span><h3>Monte a sacola</h3><p>Confira os itens e escolha se prefere retirar na loja ou receber em casa.</p></li>
+      <li class="step"><span class="n">3</span><h3>Finalize</h3><p>Combine tudo pelo WhatsApp ou pague na hora, com Pix ou cartão.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="sec" id="insta">
+  <div class="in">
+    <div class="head-row" style="margin-bottom:0">
+      <div>
+        <h2 class="title">No Instagram</h2>
+        <span class="title-rule" aria-hidden="true"></span>
+      </div>
+      <a class="btn btn-dark" href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer">@fitlivefashionwear</a>
+    </div>
+    <div class="ig-grid">
+      <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram"><img src="img/ig-1.jpg" width="300" height="354" alt="Look com conjunto rosa na loja"></a>
+      <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram"><img src="img/ig-2.jpg" width="300" height="354" alt="Divulgação da liquidação FITLIVE"></a>
+      <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram"><img src="img/ig-3.jpg" width="300" height="354" alt="Atendente da loja segurando a sacola FITLIVE"></a>
+      <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram"><img src="img/ig-4.jpg" width="300" height="354" alt="Look com casaco bege ao ar livre"></a>
+      <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram"><img src="img/ig-5.jpg" width="300" height="354" alt="Quatro dias, quatro looks"></a>
+      <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram"><img src="img/ig-6.jpg" width="300" height="292" alt="Look fitness marrom na loja"></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="contato">
+  <div class="in">
+    <div class="foot-grid">
+      <img class="foot-logo" src="img/logo.jpg" width="150" height="150" alt="Logo FITLIVE Fashion Wear">
+      <div>
+        <h3>Onde estamos</h3>
+        <p>R. Barão do Rio Branco, 318<br>Rondonópolis, MT</p>
+        <h3 style="margin-top:18px">Horário</h3>
+        <p>Segunda a sexta, das 8h às 18h<br>Sábado, das 8h às 12h</p>
+      </div>
+      <div>
+        <h3>Fale com a gente</h3>
+        <p>WhatsApp: (66) 99620-1000</p>
+        <p style="margin-top:8px">Instagram: <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer">@fitlivefashionwear</a></p>
+      </div>
+    </div>
+    <p class="foot-note">Protótipo de demonstração. Produtos, fotos e preços são exemplos, e os botões de pagamento não cobram nada.</p>
+  </div>
+</footer>
+
+<div class="bar" id="bar" hidden><button type="button" id="bar-btn"><span id="bar-left">Ver sacola</span><span id="bar-right"></span></button></div>
+
+<!-- ============ PRODUTO ============ -->
+<div class="layer" id="layer-product" role="dialog" aria-modal="true" aria-labelledby="pm-title" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="panel">
+    <button type="button" class="x" data-close aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <div class="pm-img" id="pm-img"></div>
+    <div class="pm-info">
+      <h2 id="pm-title"></h2>
+      <p class="pm-price" id="pm-price"></p>
+      <p class="lbl" id="pm-sizes-label">Tamanho</p>
+      <div class="sizes" id="pm-sizes" role="group" aria-labelledby="pm-sizes-label"></div>
+      <p class="hint" id="pm-hint" aria-live="polite"></p>
+      <p class="lbl" style="margin-top:12px">Quantidade</p>
+      <div class="stepper" role="group" aria-label="Quantidade">
+        <button type="button" id="pm-minus" aria-label="Diminuir">−</button>
+        <output id="pm-qty" aria-live="polite">1</output>
+        <button type="button" id="pm-plus" aria-label="Aumentar">+</button>
+      </div>
+      <button type="button" class="btn btn-dark pm-add" id="pm-add">Adicionar à sacola</button>
+      <p class="pm-note">Retire na loja ou receba em casa. O pagamento é combinado no final do pedido.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SACOLA ============ -->
+<div class="layer" id="layer-cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="panel">
+    <div class="cart-head">
+      <h2 id="cart-title">Sua sacola</h2>
+      <button type="button" class="x" data-close aria-label="Fechar a sacola"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    </div>
+    <div class="cart-body" id="cart-body"></div>
+    <div class="cart-foot" id="cart-foot" hidden>
+      <div class="tot"><span>Subtotal</span><span id="t-sub"></span></div>
+      <div class="tot"><span>Entrega</span><span id="t-del"></span></div>
+      <div class="tot big"><span>Total</span><span id="t-total"></span></div>
+      <button type="button" class="btn btn-gold" id="checkout">Finalizar pedido</button>
+      <p class="demo-line">Demonstração: nenhum pagamento é feito.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RESULTADO ============ -->
+<div class="layer" id="layer-result" role="dialog" aria-modal="true" aria-labelledby="res-title" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="panel">
+    <button type="button" class="x" data-close aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <h2 id="res-title"></h2>
+    <p class="res-sub" id="res-sub"></p>
+    <div id="res-content"></div>
+    <p class="res-note" id="res-note"></p>
+    <button type="button" class="btn btn-dark" id="res-done">Entendi</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+  var motion = hasGsap && !reduce;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  var money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  function fmt(n) { return money.format(n); }
+  var FEE = 10;
+
+  /* ---------- estado ---------- */
+  var cart = [];                       // { id, name, price, size, qty, img }
+  var recv = 'retirada', pay = 'whatsapp', buyer = '';
+  function lineKey(l) { return l.id + '|' + l.size; }
+  function count() { return cart.reduce(function (a, l) { return a + l.qty; }, 0); }
+  function subtotal() { return cart.reduce(function (a, l) { return a + l.qty * l.price; }, 0); }
+  function delivery() { return recv === 'entrega' && cart.length ? FEE : 0; }
+  function total() { return subtotal() + delivery(); }
+
+  /* ---------- camadas ---------- */
+  var layerStack = [], lastFocus = null;
+  function focusables(el) { return $$('button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])', el).filter(function (n) { return n.offsetParent !== null; }); }
+  function openLayer(el, opener) {
+    if (opener) lastFocus = opener;
+    el.hidden = false;
+    toastEl.classList.remove('show');
+    document.body.classList.add('locked');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('open'); }); });
+    layerStack.push(el);
+    setTimeout(function () { var f = focusables(el); var first = $('[data-autofocus]', el) || f[0]; if (first) first.focus({ preventScroll: true }); }, 60);
+    syncBar();
+  }
+  function closeLayer(el, keepLock) {
+    el.classList.remove('open');
+    layerStack = layerStack.filter(function (x) { return x !== el; });
+    setTimeout(function () { el.hidden = true; }, reduce ? 0 : 280);
+    if (!layerStack.length && !keepLock) {
+      document.body.classList.remove('locked');
+      if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
+    }
+    syncBar();
+  }
+  document.addEventListener('click', function (e) {
+    var c = e.target.closest('[data-close]');
+    if (c) { var layer = c.closest('.layer'); if (layer) closeLayer(layer); }
+  });
+  document.addEventListener('keydown', function (e) {
+    var top = layerStack[layerStack.length - 1];
+    if (!top) return;
+    if (e.key === 'Escape') { closeLayer(top); return; }
+    if (e.key === 'Tab') {
+      var f = focusables(top);
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* ---------- aviso rápido ---------- */
+  var toastEl = $('#toast'), toastT = null;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('show'); }, 2600);
+  }
+
+  /* ---------- barra da sacola (celular) ---------- */
+  function syncBar() {
+    var bar = $('#bar');
+    var show = count() > 0 && !layerStack.length;
+    bar.hidden = !show;
+    document.body.classList.toggle('has-bar', show);
+  }
+
+  /* ---------- produto ---------- */
+  var cur = null;
+  function imgsHtml(card) {
+    var pimg = $('.pimg', card);
+    var fg = $('img.fg', card);
+    var html = '';
+    if (pimg.getAttribute('data-fit') === 'contain') html += '<img class="bg" src="' + fg.getAttribute('src') + '" alt="" aria-hidden="true">';
+    html += '<img class="fg" src="' + fg.getAttribute('src') + '" alt="' + (fg.getAttribute('alt') || '') + '">';
+    return { html: html, fit: pimg.getAttribute('data-fit') || '', top: pimg.hasAttribute('data-top') };
+  }
+  function openProduct(card, opener) {
+    cur = { card: card, id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), price: parseFloat(card.getAttribute('data-price')), size: null, qty: 1 };
+    var im = imgsHtml(card);
+    var pm = $('#pm-img'); pm.innerHTML = im.html; if (im.fit) pm.setAttribute('data-fit', im.fit); else pm.removeAttribute('data-fit');
+    if (im.top) pm.setAttribute('data-top', ''); else pm.removeAttribute('data-top');
+    $('#pm-title').textContent = cur.name;
+    $('#pm-price').textContent = fmt(cur.price);
+    $('#pm-qty').textContent = '1';
+    $('#pm-hint').textContent = '';
+    var sizes = card.getAttribute('data-sizes').split(',');
+    $('#pm-sizes').innerHTML = sizes.map(function (s) { return '<button type="button" class="size" aria-pressed="false" data-size="' + s + '">' + s + '</button>'; }).join('');
+    $('#pm-sizes-label').textContent = /^\d+$/.test(sizes[0]) ? 'Número' : 'Tamanho';
+    openLayer($('#layer-product'), opener);
+  }
+  $('#pm-sizes').addEventListener('click', function (e) {
+    var b = e.target.closest('.size'); if (!b) return;
+    cur.size = b.getAttribute('data-size');
+    $$('.size', this).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    $('#pm-hint').textContent = '';
+  });
+  $('#pm-minus').addEventListener('click', function () { if (cur.qty > 1) { cur.qty--; $('#pm-qty').textContent = cur.qty; } });
+  $('#pm-plus').addEventListener('click', function () { if (cur.qty < 9) { cur.qty++; $('#pm-qty').textContent = cur.qty; } });
+
+  $('#pm-add').addEventListener('click', function () {
+    if (!cur.size) {
+      var lab = $('#pm-sizes-label').textContent.toLowerCase();
+      $('#pm-hint').textContent = 'Escolha o ' + (lab === 'número' ? 'número' : 'tamanho') + ' para continuar.';
+      var box = $('#pm-sizes'); box.classList.remove('shake'); void box.offsetWidth; box.classList.add('shake');
+      var f = $('.size', box); if (f) f.focus();
+      return;
+    }
+    var fromRect = $('#pm-img').getBoundingClientRect();
+    var src = $('#pm-img img.fg').getAttribute('src');
+    var key = cur.id + '|' + cur.size, found = null;
+    cart.forEach(function (l) { if (lineKey(l) === key) found = l; });
+    if (found) found.qty = Math.min(9, found.qty + cur.qty);
+    else cart.push({ id: cur.id, name: cur.name, price: cur.price, size: cur.size, qty: cur.qty, img: src });
+    var msg = cur.name + ' (' + cur.size + ') foi para a sacola';
+    closeLayer($('#layer-product'), true);
+    document.body.classList.remove('locked');
+    renderCart(); toast(msg);
+    flyToCart(src, fromRect);
+  });
+
+  function flyToCart(src, from) {
+    var target = $('#cart-btn').getBoundingClientRect();
+    var barVisible = !$('#bar').hidden;
+    if (!motion) return;
+    var fly = document.createElement('img');
+    fly.className = 'fly'; fly.src = src; fly.alt = '';
+    var w = Math.min(from.width, 220), h = w * 1.25;
+    fly.style.width = w + 'px'; fly.style.height = h + 'px';
+    document.body.appendChild(fly);
+    gsap.set(fly, { left: from.left + (from.width - w) / 2, top: from.top + (from.height - h) / 2, opacity: 0.95 });
+    gsap.to(fly, {
+      left: target.left + target.width / 2 - 14, top: target.top + target.height / 2 - 17, width: 28, height: 34, opacity: 0.4,
+      duration: 0.85, ease: 'power3.inOut',
+      onComplete: function () {
+        fly.remove();
+        gsap.fromTo('#cart-btn', { scale: 1 }, { scale: 1.14, duration: 0.16, yoyo: true, repeat: 1, ease: 'power1.out' });
+      }
+    });
+  }
+
+  /* ---------- sacola ---------- */
+  function renderCart() {
+    var n = count();
+    var badge = $('#cart-count'); badge.textContent = n; badge.hidden = n === 0;
+    $('#bar-left').textContent = 'Ver sacola (' + n + ')';
+    $('#bar-right').textContent = fmt(total());
+    syncBar();
+    var body = $('#cart-body'), foot = $('#cart-foot');
+    if (!cart.length) {
+      body.innerHTML = '<div class="empty"><p>Sua sacola está vazia.</p><button type="button" class="btn btn-dark" data-close data-goto="colecao">Ver a coleção</button></div>';
+      foot.hidden = true; return;
+    }
+    var items = cart.map(function (l) {
+      var k = lineKey(l);
+      return '<div class="line"><img src="' + l.img + '" alt="">' +
+        '<div><h4>' + l.name + '</h4><p class="meta">' + (/^\d+$/.test(l.size) ? 'Número ' : 'Tamanho ') + l.size + '</p>' +
+        '<div class="row2"><div class="stepper" role="group" aria-label="Quantidade de ' + l.name + '">' +
+        '<button type="button" data-act="dec" data-key="' + k + '" aria-label="Diminuir">−</button><output>' + l.qty + '</output>' +
+        '<button type="button" data-act="inc" data-key="' + k + '" aria-label="Aumentar">+</button></div>' +
+        '<span class="lp">' + fmt(l.qty * l.price) + '</span></div>' +
+        '<button type="button" class="rm" data-act="rm" data-key="' + k + '">Remover</button></div></div>';
+    }).join('');
+    var opts =
+      '<fieldset class="opt"><legend>Como você quer receber?</legend>' +
+      '<label><input type="radio" name="recv" value="retirada"' + (recv === 'retirada' ? ' checked' : '') + '><span>Retirar na loja<span class="sm">R. Barão do Rio Branco, 318</span></span><span class="push">Grátis</span></label>' +
+      '<label><input type="radio" name="recv" value="entrega"' + (recv === 'entrega' ? ' checked' : '') + '><span>Entrega em Rondonópolis<span class="sm">Valor de exemplo</span></span><span class="push">' + fmt(FEE) + '</span></label></fieldset>' +
+      '<fieldset class="opt"><legend>Como você quer pagar?</legend>' +
+      '<label><input type="radio" name="pay" value="whatsapp"' + (pay === 'whatsapp' ? ' checked' : '') + '><span>Combinar pelo WhatsApp<span class="sm">Você envia o pedido e a loja confirma</span></span></label>' +
+      '<label><input type="radio" name="pay" value="pix"' + (pay === 'pix' ? ' checked' : '') + '><span>Pix<span class="sm">Pague na hora, pelo celular</span></span></label>' +
+      '<label><input type="radio" name="pay" value="cartao"' + (pay === 'cartao' ? ' checked' : '') + '><span>Cartão de crédito<span class="sm">Pagamento online seguro</span></span></label></fieldset>' +
+      '<div class="nm"><label for="buyer">Seu nome (opcional)</label><input type="text" id="buyer" autocomplete="name" value="' + buyer.replace(/"/g, '&quot;') + '"></div>';
+    body.innerHTML = items + opts;
+    foot.hidden = false;
+    $('#t-sub').textContent = fmt(subtotal());
+    $('#t-del').textContent = delivery() ? fmt(delivery()) : 'Grátis';
+    $('#t-total').textContent = fmt(total());
+  }
+  $('#cart-body').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (b) {
+      var key = b.getAttribute('data-key'), act = b.getAttribute('data-act');
+      cart.forEach(function (l) {
+        if (lineKey(l) !== key) return;
+        if (act === 'inc' && l.qty < 9) l.qty++;
+        if (act === 'dec' && l.qty > 1) l.qty--;
+        if (act === 'rm') l.qty = 0;
+      });
+      cart = cart.filter(function (l) { return l.qty > 0; });
+      var y = $('#cart-body').scrollTop; renderCart(); $('#cart-body').scrollTop = y;
+      return;
+    }
+    var g = e.target.closest('[data-goto]');
+    if (g) setTimeout(function () { var t = document.getElementById(g.getAttribute('data-goto')); if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 300);
+  });
+  $('#cart-body').addEventListener('change', function (e) {
+    if (e.target.name === 'recv') { recv = e.target.value; renderCart(); }
+    if (e.target.name === 'pay') { pay = e.target.value; }
+  });
+  $('#cart-body').addEventListener('input', function (e) { if (e.target.id === 'buyer') buyer = e.target.value; });
+
+  function openCart(opener) { renderCart(); openLayer($('#layer-cart'), opener); }
+  $('#cart-btn').addEventListener('click', function () { openCart(this); });
+  $('#bar-btn').addEventListener('click', function () { openCart(this); });
+
+  /* ---------- fechamento (simulado) ---------- */
+  function orderText() {
+    var lines = cart.map(function (l) { return '• ' + l.qty + 'x ' + l.name + ' (' + l.size + '), ' + fmt(l.qty * l.price); });
+    return 'Olá! Quero fazer um pedido pelo site:\n' + lines.join('\n') + '\n\nTotal: ' + fmt(total()) +
+      '\nRecebimento: ' + (recv === 'entrega' ? 'entrega em Rondonópolis' : 'retirar na loja') +
+      '\nPagamento: ' + ({ whatsapp: 'combinar pelo WhatsApp', pix: 'Pix', cartao: 'cartão de crédito' })[pay] +
+      (buyer.trim() ? '\nNome: ' + buyer.trim() : '');
+  }
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function showResult(mode) {
+    var title = $('#res-title'), sub = $('#res-sub'), content = $('#res-content'), note = $('#res-note');
+    if (mode === 'geral') {
+      title.textContent = 'Pedir pelo WhatsApp';
+      sub.textContent = 'Esta é a mensagem que chegaria no WhatsApp da loja:';
+      content.innerHTML = '<div class="wa">' + esc('Olá! Vi o site da FITLIVE e gostaria de saber mais sobre as peças.') + '</div>';
+      note.textContent = 'Na versão final, este botão abre a conversa com a loja, com a mensagem já escrita.';
+    } else if (pay === 'pix') {
+      title.textContent = 'Pagar com Pix';
+      sub.textContent = 'Total do pedido: ' + fmt(total());
+      content.innerHTML = '<div class="pixbox"><div class="qr" aria-hidden="true"></div><p>Aqui apareceria o QR Code do Pix da loja.</p><code>Código copia e cola da demonstração</code></div>';
+      note.textContent = 'Demonstração: nenhum pagamento foi feito. Na versão final, o Pix cai direto na conta da loja.';
+    } else if (pay === 'cartao') {
+      title.textContent = 'Pagar com cartão';
+      sub.textContent = 'Total do pedido: ' + fmt(total());
+      content.innerHTML = '<div class="pixbox"><p>Aqui abriria a tela segura de pagamento com cartão, com as bandeiras e o parcelamento que a loja oferecer.</p></div>';
+      note.textContent = 'Demonstração: nenhum dado de cartão é pedido e nenhum pagamento foi feito.';
+    } else {
+      title.textContent = 'Pedido pelo WhatsApp';
+      sub.textContent = 'Esta é a mensagem que chegaria no WhatsApp da loja:';
+      content.innerHTML = '<div class="wa">' + esc(orderText()) + '</div>';
+      note.textContent = 'Na versão final, este botão abre a conversa com a loja, com o pedido pronto para enviar.';
+    }
+    openLayer($('#layer-result'), $('#checkout'));
+  }
+  $('#checkout').addEventListener('click', function () {
+    var cartLayer = $('#layer-cart');
+    closeLayer(cartLayer, true);
+    showResult(pay);
+  });
+  $('#res-done').addEventListener('click', function () {
+    var wasOrder = $('#res-title').textContent !== 'Pedir pelo WhatsApp';
+    closeLayer($('#layer-result'));
+    if (wasOrder) { cart = []; renderCart(); toast('Pedido de demonstração concluído.'); }
+  });
+  document.addEventListener('click', function (e) {
+    var w = e.target.closest('[data-whats]');
+    if (w) { lastFocus = w; showResult('geral'); }
+  });
+
+  /* ---------- cards ---------- */
+  $('#grid').addEventListener('click', function (e) {
+    var o = e.target.closest('[data-open]'); if (!o) return;
+    openProduct(o.closest('.card'), o);
+  });
+
+  /* ---------- filtro ---------- */
+  var cards = $$('.card');
+  var chips = $$('.chip');
+  var batchTriggers = [];
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var f = chip.getAttribute('data-filter');
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      var shown = [];
+      cards.forEach(function (card) {
+        var ok = f === 'todos' || card.getAttribute('data-cat') === f;
+        card.hidden = !ok; if (ok) shown.push(card);
+      });
+      $('#count-note').textContent = shown.length + (shown.length === 1 ? ' peça' : ' peças');
+      if (motion) {
+        batchTriggers.forEach(function (t) { t.kill(); }); batchTriggers = [];
+        gsap.fromTo(shown, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform' });
+      }
+    });
+  });
+
+  renderCart();
+
+  /* ---------- movimento ---------- */
+  if (!motion) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.from('.hero h1 .ln > span', { yPercent: 112, duration: 1, stagger: 0.14 }, 0.1)
+    .from('.hero p.sub, .hero-actions', { opacity: 0, y: 18, duration: 0.8, stagger: 0.12 }, 0.6)
+    .from('.collage .a', { clipPath: 'inset(0 100% 0 0)', duration: 1.2, ease: 'power3.inOut' }, 0.3)
+    .from('.collage .a img', { scale: 1.25, duration: 1.8, ease: 'power2.out' }, 0.3)
+    .from('.collage .frame', { opacity: 0, x: -18, y: -18, duration: 1, ease: 'power2.out' }, 0.9)
+    .from('.collage .b', { clipPath: 'inset(100% 0 0 0)', duration: 1.1, ease: 'power3.inOut' }, 0.8)
+    .from('.collage .b img', { scale: 1.25, duration: 1.6, ease: 'power2.out' }, 0.8);
+
+  gsap.from('.info li', { opacity: 0, y: 10, duration: 0.6, stagger: 0.12, scrollTrigger: { trigger: '.info', start: 'top 95%', once: true } });
+
+  $$('.title-rule').forEach(function (r) {
+    gsap.from(r, { scaleX: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: r, start: 'top 90%', once: true } });
+  });
+
+  gsap.set(cards, { opacity: 0, y: 28 });
+  batchTriggers = ScrollTrigger.batch(cards, {
+    start: 'top 92%', once: true,
+    onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.65, stagger: 0.08, ease: 'power2.out', clearProps: 'transform' }); }
+  });
+
+  gsap.set('.step', { opacity: 0, y: 26 });
+  ScrollTrigger.batch('.step', {
+    start: 'top 90%', once: true,
+    onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power2.out' }); }
+  });
+
+  gsap.set('.ig-grid a', { opacity: 0, scale: 0.92 });
+  ScrollTrigger.batch('.ig-grid a', {
+    start: 'top 92%', once: true,
+    onEnter: function (batch) { gsap.to(batch, { opacity: 1, scale: 1, duration: 0.6, stagger: 0.09, ease: 'power2.out' }); }
+  });
+
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { ScrollTrigger.refresh(); }); }
+})();
+</script>
+</body>
+</html>
