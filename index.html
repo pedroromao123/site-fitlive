@@ -125,6 +125,15 @@
   .card .price { font-size: 19px; color: var(--gold-deep); font-weight: 600; margin: 4px 0 14px; }
   .card .btn-outline { margin-top: auto; width: 100%; }
   .count-note { color: var(--muted-l); font-size: 16px; }
+  .card .brand { margin-top: 14px; font-size: 14px; color: var(--muted-l); line-height: 1.2; }
+  .card .brand + h3 { margin-top: 3px; }
+  .brandbar { display: flex; align-items: center; gap: 14px; margin: -8px 0 20px; }
+  .brandbar .bl { font-size: 15px; color: var(--muted-l); flex: none; }
+  .chips.scroll { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .chips.scroll::-webkit-scrollbar { display: none; }
+  .chip.sm { min-height: 42px; padding: 0 18px; font-size: 16px; flex: none; }
+  .pm-brand { font-size: 15px; color: var(--muted-l); margin-bottom: 4px; padding-right: 40px; }
+  .bm-link { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--gold-deep); text-decoration: underline; cursor: pointer; }
 
   /* ---------- instagram ---------- */
   .ig-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: clamp(24px, 3vw, 40px); }
@@ -404,48 +413,49 @@
         </div>
       </div>
     </div>
+    <div class="brandbar" id="brandbar" hidden><span class="bl">Marca</span><div class="chips scroll" id="brand-chips" role="group" aria-label="Filtrar por marca"></div></div>
     <p class="count-note" id="count-note" aria-live="polite" style="margin-bottom:22px">8 peças</p>
 
     <div class="grid" id="grid">
-      <article class="card" data-id="regata" data-name="Regata Colcci Sport" data-price="169.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="regata" data-brand="Colcci" data-name="Regata Colcci Sport" data-price="169.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <button type="button" class="pimg" data-open data-top aria-label="Ver Regata Colcci Sport"><img class="fg" src="img/hero-a.jpg" width="487" height="742" alt="Regata azul Colcci Sport"></button>
-        <h3>Regata Colcci Sport</h3><p class="price">R$ 169,90</p>
+        <p class="brand">Colcci</p><h3>Regata Colcci Sport</h3><p class="price">R$ 169,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="cropped" data-name="Cropped Lança Perfume" data-price="119.9" data-cat="roupas" data-sizes="P,M,G">
+      <article class="card" data-id="cropped" data-brand="Lança Perfume" data-name="Cropped Lança Perfume" data-price="119.9" data-cat="roupas" data-sizes="P,M,G">
         <button type="button" class="pimg" data-open data-top aria-label="Ver Cropped Lança Perfume"><img class="fg" src="img/hero-b.jpg" width="472" height="739" alt="Cropped bege Lança Perfume"></button>
-        <h3>Cropped Lança Perfume</h3><p class="price">R$ 119,90</p>
+        <p class="brand">Lança Perfume</p><h3>Cropped Lança Perfume</h3><p class="price">R$ 119,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="bordo" data-name="Conjunto top e legging bordô" data-price="259.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="bordo" data-brand="" data-name="Conjunto top e legging bordô" data-price="259.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <button type="button" class="pimg" data-open aria-label="Ver Conjunto top e legging bordô"><img class="fg" src="img/p-bordo.jpg" width="424" height="530" alt="Conjunto fitness bordô, top e legging"></button>
         <h3>Conjunto top e legging bordô</h3><p class="price">R$ 259,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="nikeverde" data-name="Conjunto Nike verde, camiseta e short" data-price="249.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="nikeverde" data-brand="Nike" data-name="Conjunto Nike verde, camiseta e short" data-price="249.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <button type="button" class="pimg" data-open aria-label="Ver Conjunto Nike verde"><img class="fg" src="img/p-nike-verde.jpg" width="300" height="354" alt="Camiseta verde e short cinza Nike"></button>
-        <h3>Conjunto Nike verde, camiseta e short</h3><p class="price">R$ 249,90</p>
+        <p class="brand">Nike</p><h3>Conjunto Nike verde, camiseta e short</h3><p class="price">R$ 249,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="active" data-name="Legging Active Soul" data-price="189.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="active" data-brand="" data-name="Legging Active Soul" data-price="189.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <span class="tag">Lançamento</span>
         <button type="button" class="pimg" data-open aria-label="Ver Legging Active Soul"><img class="fg" src="img/p-active-soul.jpg" width="300" height="354" alt="Legging Active Soul, lançamento"></button>
         <h3>Legging Active Soul</h3><p class="price">R$ 189,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="skechers" data-name="Tênis Skechers rosa" data-price="459.9" data-cat="tenis" data-sizes="34,35,36,37,38,39">
+      <article class="card" data-id="skechers" data-brand="Skechers" data-name="Tênis Skechers rosa" data-price="459.9" data-cat="tenis" data-sizes="34,35,36,37,38,39">
         <button type="button" class="pimg" data-open aria-label="Ver Tênis Skechers rosa"><img class="fg" src="img/p-skechers.jpg" width="300" height="292" alt="Tênis Skechers rosa sendo amarrado"></button>
-        <h3>Tênis Skechers rosa</h3><p class="price">R$ 459,90</p>
+        <p class="brand">Skechers</p><h3>Tênis Skechers rosa</h3><p class="price">R$ 459,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="v2k" data-name="Tênis Nike V2K Run" data-price="899.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
+      <article class="card" data-id="v2k" data-brand="Nike" data-name="Tênis Nike V2K Run" data-price="899.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
         <button type="button" class="pimg" data-open data-fit="contain" aria-label="Ver Tênis Nike V2K Run"><img class="bg" src="img/p-v2k.jpg" alt="" aria-hidden="true"><img class="fg" src="img/p-v2k.jpg" width="524" height="476" alt="Tênis Nike V2K Run bege"></button>
-        <h3>Tênis Nike V2K Run</h3><p class="price">R$ 899,90</p>
+        <p class="brand">Nike</p><h3>Tênis Nike V2K Run</h3><p class="price">R$ 899,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="court" data-name="Tênis Nike Court Legacy Lift" data-price="649.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
+      <article class="card" data-id="court" data-brand="Nike" data-name="Tênis Nike Court Legacy Lift" data-price="649.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
         <button type="button" class="pimg" data-open data-fit="contain" aria-label="Ver Tênis Nike Court Legacy Lift"><img class="bg" src="img/p-court.jpg" alt="" aria-hidden="true"><img class="fg" src="img/p-court.jpg" width="558" height="476" alt="Tênis Nike Court Legacy Lift branco"></button>
-        <h3>Tênis Nike Court Legacy Lift</h3><p class="price">R$ 649,90</p>
+        <p class="brand">Nike</p><h3>Tênis Nike Court Legacy Lift</h3><p class="price">R$ 649,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
     </div>
@@ -545,9 +555,17 @@
               <button type="button" class="btn btn-outline" id="nv-sample">Usar uma foto de exemplo</button>
             </div>
             <div class="nvs"><h4><span>2</span>Nome da peça</h4><input type="text" id="nv-name" autocomplete="off" placeholder="Ex: Legging cintura alta preta"></div>
-            <div class="nvs"><h4><span>3</span>Preço</h4><input type="text" id="nv-price" inputmode="numeric" autocomplete="off" placeholder="R$ 0,00"></div>
             <div class="nvs">
-              <h4><span>4</span>Categoria</h4>
+              <h4><span>3</span>Marca</h4>
+              <div class="pills" id="nv-brands" role="radiogroup" aria-label="Marca"></div>
+              <div id="nv-brand-other" hidden style="margin-top:12px">
+                <input type="text" id="nv-brand-text" autocomplete="off" placeholder="Digite o nome da marca">
+                <p class="zone-note" id="nv-brand-hint" aria-live="polite"></p>
+              </div>
+            </div>
+            <div class="nvs"><h4><span>4</span>Preço</h4><input type="text" id="nv-price" inputmode="numeric" autocomplete="off" placeholder="R$ 0,00"></div>
+            <div class="nvs">
+              <h4><span>5</span>Categoria</h4>
               <div class="pills" role="radiogroup" aria-label="Categoria">
                 <label class="pill"><input type="radio" name="nvcat" value="roupas" checked><span>Roupas</span></label>
                 <label class="pill"><input type="radio" name="nvcat" value="tenis"><span>Tênis</span></label>
@@ -555,7 +573,7 @@
               </div>
             </div>
             <div class="nvs">
-              <h4><span>5</span>Tamanhos que tem</h4>
+              <h4><span>6</span>Tamanhos que tem</h4>
               <div class="pills" id="nv-sizes"></div>
               <button type="button" class="rm" id="nv-all" style="margin-top:8px">Marcar todos</button>
             </div>
@@ -588,6 +606,7 @@
     <button type="button" class="x" data-close aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
     <div class="pm-img" id="pm-img"></div>
     <div class="pm-info">
+      <p class="pm-brand" id="pm-brand" hidden></p>
       <h2 id="pm-title"></h2>
       <p class="pm-price" id="pm-price"></p>
       <p class="lbl" id="pm-sizes-label">Tamanho</p>
@@ -746,6 +765,7 @@
     var pm = $('#pm-img'); pm.innerHTML = im.html; if (im.fit) pm.setAttribute('data-fit', im.fit); else pm.removeAttribute('data-fit');
     if (im.top) pm.setAttribute('data-top', ''); else pm.removeAttribute('data-top');
     $('#pm-title').textContent = cur.name;
+    var pb = $('#pm-brand'), bv = card.getAttribute('data-brand') || ''; pb.textContent = bv; pb.hidden = !bv;
     $('#pm-price').textContent = fmt(cur.price);
     $('#pm-qty').textContent = '1';
     $('#pm-hint').textContent = '';
@@ -917,7 +937,7 @@
   allCards().forEach(function (card) {
     var pimg = $('.pimg', card), fg = $('img.fg', card), tg = $('.tag', card);
     products.push({
-      id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), price: parseFloat(card.getAttribute('data-price')),
+      id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), brand: card.getAttribute('data-brand') || '', price: parseFloat(card.getAttribute('data-price')),
       cat: card.getAttribute('data-cat'), sizes: card.getAttribute('data-sizes').split(','), img: fg.getAttribute('src'),
       fit: pimg.getAttribute('data-fit') || '', top: pimg.hasAttribute('data-top'), tag: tg ? tg.textContent : '', soldout: false, hidden: false
     });
@@ -931,6 +951,7 @@
     var tagText = p.soldout ? 'Esgotado' : (p.tag || '');
     return (tagText ? '<span class="tag' + (p.soldout ? ' dark' : '') + '">' + escA(tagText) + '</span>' : '') +
       '<button type="button" class="pimg"' + (preview ? ' tabindex="-1"' : ' data-open') + (p.fit === 'contain' ? ' data-fit="contain"' : '') + (p.top ? ' data-top' : '') + ' aria-label="Ver ' + escA(p.name) + '">' + imgs + '</button>' +
+      (p.brand ? '<p class="brand">' + escA(p.brand) + '</p>' : '') +
       '<h3>' + escA(p.name || 'Nome da peça') + '</h3><p class="price">' + fmt(p.price || 0) + '</p>' +
       '<button type="button" class="btn btn-outline"' + (preview ? ' tabindex="-1"' : ' data-open') + '>Escolher tamanho</button>';
   }
@@ -938,7 +959,7 @@
     var art = document.createElement('article');
     art.className = 'card';
     art.setAttribute('data-id', p.id); art.setAttribute('data-name', p.name); art.setAttribute('data-price', p.price);
-    art.setAttribute('data-cat', p.cat); art.setAttribute('data-sizes', p.sizes.join(','));
+    art.setAttribute('data-cat', p.cat); art.setAttribute('data-sizes', p.sizes.join(',')); art.setAttribute('data-brand', p.brand || '');
     art.innerHTML = cardInner(p, false);
     return art;
   }
@@ -956,32 +977,79 @@
     $('.btn-outline', card).textContent = p.soldout ? 'Esgotado' : 'Escolher tamanho';
   }
 
-  /* ---------- filtro ---------- */
-  var filter = 'todos';
+  /* ---------- marcas ---------- */
+  var brands = [];
+  products.forEach(function (p) { if (p.brand && brands.indexOf(p.brand) < 0) brands.push(p.brand); });
+  function brandKey(t) { return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function titleCase(t) {
+    var small = { de: 1, da: 1, do: 1, dos: 1, das: 1, e: 1, '&': 1 };
+    return t.trim().replace(/\s+/g, ' ').toLowerCase().split(' ').map(function (w, k) {
+      if (k > 0 && small[w]) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    }).join(' ');
+  }
+  function lev(a, b) {
+    var m = a.length, n = b.length, d = [], x, y;
+    for (x = 0; x <= m; x++) { d[x] = [x]; }
+    for (y = 1; y <= n; y++) { d[0][y] = y; }
+    for (x = 1; x <= m; x++) for (y = 1; y <= n; y++) d[x][y] = Math.min(d[x - 1][y] + 1, d[x][y - 1] + 1, d[x - 1][y - 1] + (a[x - 1] === b[y - 1] ? 0 : 1));
+    return d[m][n];
+  }
+  // corrige maiúsculas, acentos e espaços; reaproveita o nome já cadastrado quando é a mesma marca
+  function normalizeBrand(raw) {
+    var label = titleCase(raw), key = brandKey(label), found = null, near = null;
+    brands.forEach(function (b) {
+      var bk = brandKey(b);
+      if (bk === key) found = b;
+      else if (!near && key.length >= 4 && lev(bk, key) <= 1) near = b;
+    });
+    return found ? { label: found, existing: true, near: null } : { label: label, existing: false, near: near };
+  }
+
+  /* ---------- filtro (categoria e marca) ---------- */
+  var filter = 'todos', brandFilter = 'todas';
   var chips = $$('.chip');
   var batchTriggers = [];
+  function renderBrandChips(list) {
+    var names = [];
+    list.forEach(function (p) { if (p.brand && names.indexOf(p.brand) < 0) names.push(p.brand); });
+    names.sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); });
+    if (brandFilter !== 'todas' && names.indexOf(brandFilter) < 0) brandFilter = 'todas';
+    var bar = $('#brandbar');
+    bar.hidden = names.length < 2;
+    $('#brand-chips').innerHTML = ['todas'].concat(names).map(function (n) {
+      return '<button type="button" class="chip sm" data-brand="' + escA(n) + '" aria-pressed="' + (n === brandFilter ? 'true' : 'false') + '">' + (n === 'todas' ? 'Todas' : escA(n)) + '</button>';
+    }).join('');
+  }
   function applyFilter() {
     var anyAcc = products.some(function (p) { return p.cat === 'acessorios' && !p.hidden; });
     $('[data-filter="acessorios"]').hidden = !anyAcc;
     if (!anyAcc && filter === 'acessorios') filter = 'todos';
+    var inCat = products.filter(function (p) { return !p.hidden && (filter === 'todos' || p.cat === filter); });
+    renderBrandChips(inCat);
     var n = 0;
     products.forEach(function (p) {
       var card = cardOf(p.id); if (!card) return;
-      var ok = !p.hidden && (filter === 'todos' || p.cat === filter);
+      var ok = !p.hidden && (filter === 'todos' || p.cat === filter) && (brandFilter === 'todas' || p.brand === brandFilter);
       card.hidden = !ok; if (ok) n++;
     });
     $('#count-note').textContent = n + (n === 1 ? ' peça' : ' peças');
     chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-filter') === filter ? 'true' : 'false'); });
   }
+  function animateShown() {
+    if (!motion) return;
+    batchTriggers.forEach(function (t) { t.kill(); }); batchTriggers = [];
+    var shown = allCards().filter(function (c) { return !c.hidden; });
+    gsap.fromTo(shown, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform' });
+  }
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
-      filter = chip.getAttribute('data-filter'); applyFilter();
-      if (motion) {
-        batchTriggers.forEach(function (t) { t.kill(); }); batchTriggers = [];
-        var shown = allCards().filter(function (c) { return !c.hidden; });
-        gsap.fromTo(shown, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform' });
-      }
+      filter = chip.getAttribute('data-filter'); applyFilter(); animateShown();
     });
+  });
+  $('#brand-chips').addEventListener('click', function (e) {
+    var c = e.target.closest('[data-brand]'); if (!c) return;
+    brandFilter = c.getAttribute('data-brand'); applyFilter(); animateShown();
   });
 
   /* ---------- área da loja (demonstração) ---------- */
@@ -1004,7 +1072,7 @@
         ? '<input class="pe" inputmode="numeric" aria-label="Novo preço" value="' + escA(fmt(p.price)) + '"><button type="button" data-act="save">Salvar</button>'
         : '<button type="button" data-act="price">Preço</button>';
       return '<li class="prow' + (p.hidden ? ' off' : '') + '" data-id="' + p.id + '"><img src="' + p.img + '" alt="">' +
-        '<div class="pinfo"><b>' + escA(p.name) + '</b><span>' + fmt(p.price) + '</span><em>' + status + '</em></div>' +
+        '<div class="pinfo"><b>' + escA(p.name) + '</b><span>' + fmt(p.price) + '</span><em>' + (p.brand ? escA(p.brand) + ', ' : 'Sem marca, ') + status.toLowerCase() + '</em></div>' +
         '<div class="pact">' + priceBox +
         '<button type="button" data-act="sold">' + (p.soldout ? 'Voltou' : 'Esgotou') + '</button>' +
         '<button type="button" data-act="hide">' + (p.hidden ? 'Mostrar' : 'Esconder') + '</button></div></li>';
@@ -1033,19 +1101,52 @@
     $('#nv-sizes').innerHTML = sizeList(nv.cat).map(function (s) { return '<label class="pill"><input type="checkbox" value="' + s + '"' + (s === 'Único' ? ' checked' : '') + '><span>' + s + '</span></label>'; }).join('');
     $('#nv-all').hidden = nv.cat === 'acessorios';
   }
+  function renderBrands() {
+    var list = brands.slice().sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); });
+    var html = list.map(function (b) { return '<label class="pill"><input type="radio" name="nvbrand" value="' + escA(b) + '"><span>' + escA(b) + '</span></label>'; }).join('');
+    html += '<label class="pill"><input type="radio" name="nvbrand" value="__other"><span>Outra marca</span></label>';
+    html += '<label class="pill"><input type="radio" name="nvbrand" value="__none"><span>Sem marca</span></label>';
+    $('#nv-brands').innerHTML = html;
+    $('#nv-brand-text').value = ''; $('#nv-brand-other').hidden = true; $('#nv-brand-hint').innerHTML = '';
+  }
+  function readBrand() {
+    var sel = $('input[name="nvbrand"]:checked');
+    if (!sel) return { chosen: false, label: '', isNew: false };
+    if (sel.value === '__none') return { chosen: true, label: '', isNew: false };
+    if (sel.value === '__other') {
+      var raw = $('#nv-brand-text').value;
+      if (!raw.trim()) return { chosen: false, label: '', isNew: false };
+      var nb = normalizeBrand(raw);
+      return { chosen: true, label: nb.label, isNew: !nb.existing, near: nb.near, existing: nb.existing };
+    }
+    return { chosen: true, label: sel.value, isNew: false };
+  }
   function updateNew() {
     var name = $('#nv-name').value.trim();
     var d = $('#nv-price').value.replace(/\D/g, ''), price = d ? parseInt(d, 10) / 100 : 0;
     var sizes = $$('#nv-sizes input:checked').map(function (i) { return i.value; });
     var cat = $('input[name="nvcat"]:checked').value;
+    var sel = $('input[name="nvbrand"]:checked');
+    $('#nv-brand-other').hidden = !(sel && sel.value === '__other');
+    var br = readBrand();
+    // aviso embaixo do campo "Outra marca": mostra como vai ficar e sugere correção
+    var hint = '';
+    if (sel && sel.value === '__other' && $('#nv-brand-text').value.trim()) {
+      if (br.existing) hint = 'Essa marca já está cadastrada: <b>' + escA(br.label) + '</b>.';
+      else {
+        hint = 'Marca nova. Vai aparecer como <b>' + escA(br.label) + '</b>.';
+        if (br.near) hint += ' Você quis dizer <button type="button" class="bm-link" data-usebrand="' + escA(br.near) + '">' + escA(br.near) + '</button>?';
+      }
+    }
+    var bh = $('#nv-brand-hint'); if (bh.innerHTML !== hint) bh.innerHTML = hint;   // não redesenha se não mudou (senão o toque na sugestão se perde)
     var miss = [];
-    if (!nv.img) miss.push('a foto'); if (!name) miss.push('o nome'); if (!price) miss.push('o preço'); if (!sizes.length) miss.push('os tamanhos');
+    if (!nv.img) miss.push('a foto'); if (!name) miss.push('o nome'); if (!br.chosen) miss.push('a marca'); if (!price) miss.push('o preço'); if (!sizes.length) miss.push('os tamanhos');
     $('#nv-hint').textContent = miss.length ? 'Falta: ' + miss.join(', ') + '.' : '';
     $('#nv-pub').disabled = miss.length > 0;
     var pv = document.createElement('article'); pv.className = 'card pv';
-    pv.innerHTML = cardInner({ name: name, price: price, img: nv.img, fit: nv.fit, tag: 'Novo', top: false, soldout: false }, true);
+    pv.innerHTML = cardInner({ name: name, brand: br.label, price: price, img: nv.img, fit: nv.fit, tag: 'Novo', top: false, soldout: false }, true);
     var box = $('#nv-preview'); box.innerHTML = ''; box.appendChild(pv);
-    return { name: name, price: price, sizes: sizes, cat: cat };
+    return { name: name, price: price, sizes: sizes, cat: cat, brand: br.label, brandIsNew: br.isNew };
   }
   function setPhoto(src) {
     var im = new Image();
@@ -1062,7 +1163,7 @@
     $('#nv-form').reset();
     var pv = $('#nv-prev'); pv.hidden = true; pv.removeAttribute('src');
     $('#nv-drop').classList.remove('has'); $('#nv-drop-b').textContent = 'Tirar foto ou escolher da galeria';
-    renderSizes(); updateNew(); showView('adm-new');
+    renderBrands(); renderSizes(); updateNew(); showView('adm-new');
   }
   $('#nv-file').addEventListener('change', function () {
     var f = this.files && this.files[0]; if (!f) return;
@@ -1071,6 +1172,13 @@
   });
   $('#nv-sample').addEventListener('click', function () { var ex = $('.ig-grid img'); if (ex) setPhoto(ex.getAttribute('src')); });
   $('#nv-name').addEventListener('input', updateNew);
+  $('#nv-brand-text').addEventListener('input', updateNew);
+  $('#nv-brand-other').addEventListener('click', function (e) {
+    var u = e.target.closest('[data-usebrand]'); if (!u) return;
+    var want = u.getAttribute('data-usebrand');
+    $$('input[name="nvbrand"]').forEach(function (r) { if (r.value === want) r.checked = true; });
+    updateNew();
+  });
   $('#nv-price').addEventListener('input', function () { maskMoney(this); updateNew(); });
   $('#nv-form').addEventListener('change', function (e) {
     if (e.target.name === 'nvcat') { nv.cat = e.target.value; renderSizes(); }
@@ -1081,12 +1189,13 @@
     e.preventDefault();
     var f = updateNew();
     if ($('#nv-pub').disabled) return;
-    var p = { id: 'n' + (++seq), name: f.name, price: f.price, cat: f.cat, sizes: f.sizes, img: nv.img, fit: nv.fit, top: false, tag: 'Novo', soldout: false, hidden: false };
+    if (f.brand && brands.indexOf(f.brand) < 0) brands.push(f.brand);
+    var p = { id: 'n' + (++seq), name: f.name, brand: f.brand, price: f.price, cat: f.cat, sizes: f.sizes, img: nv.img, fit: nv.fit, top: false, tag: 'Novo', soldout: false, hidden: false };
     products.unshift(p);
     grid.insertBefore(makeCard(p), grid.firstChild);
-    filter = 'todos'; applyFilter();
+    filter = 'todos'; brandFilter = 'todas'; applyFilter();
     lastNew = p.id;
-    $('#done-txt').textContent = f.name + ' já está no catálogo do site, por ' + fmt(f.price) + '.';
+    $('#done-txt').textContent = f.name + (f.brand ? ' (' + f.brand + ')' : '') + ' já está no catálogo do site, por ' + fmt(f.price) + '.' + (f.brandIsNew ? ' A marca ' + f.brand + ' foi adicionada à lista.' : '');
     showView('adm-done');
   });
   $('#nv-back').addEventListener('click', function () { renderList(); showView('adm-home'); });
