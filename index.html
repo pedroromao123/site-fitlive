@@ -142,10 +142,12 @@
   .foot-note { border-top: 1px solid var(--line-d); padding: 18px 0 26px; color: var(--muted-d); font-size: 14px; }
   @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
 
-  /* ---------- barra de sacola (celular) ---------- */
-  .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px) + var(--ios-bar, 0px)); background: var(--char-deep); border-top: 1px solid rgba(255,255,255,.12); display: none; }
-  .bar button { width: 100%; min-height: 54px; border-radius: 999px; border: 0; background: var(--gold); color: var(--char-deep); font-size: 17px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; cursor: pointer; }
-  @media (max-width: 880px) { .bar:not([hidden]) { display: block; } body.has-bar { padding-bottom: calc(80px + var(--ios-bar, 0px)); } }
+  /* ---------- barra de sacola (celular): pílula compacta que some ao rolar para baixo ---------- */
+  .bar { position: fixed; left: 0; right: 0; bottom: calc(14px + env(safe-area-inset-bottom, 0px) + var(--ios-bar, 0px)); z-index: 35; display: none; justify-content: center; padding: 0 14px; pointer-events: none; transition: transform .3s ease, opacity .3s ease; }
+  .bar button { pointer-events: auto; display: flex; align-items: center; gap: 18px; min-height: 50px; padding: 0 24px; border-radius: 999px; border: 0; background: var(--gold); color: var(--char-deep); font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 12px 28px rgba(0, 0, 0, .35); }
+  .bar.away { transform: translateY(160%); opacity: 0; }
+  .bar.away button { pointer-events: none; }
+  @media (max-width: 880px) { .bar:not([hidden]) { display: flex; } }
 
   /* ---------- camadas (produto, sacola, resultado) ---------- */
   .layer { position: fixed; inset: 0; z-index: 60; display: flex; }
@@ -714,6 +716,20 @@
     bar.hidden = !show;
     document.body.classList.toggle('has-bar', show);
   }
+  var barCount = 0, lastY = window.pageYOffset, barTick = false;
+  function barAppears() { $('#bar').classList.remove('away'); }
+  window.addEventListener('scroll', function () {
+    if (barTick) return;
+    barTick = true;
+    requestAnimationFrame(function () {
+      var y = window.pageYOffset, dy = y - lastY;
+      if (Math.abs(dy) > 8) {
+        $('#bar').classList.toggle('away', dy > 0 && y > 120);   // desceu: some; subiu: volta
+        lastY = y;
+      }
+      barTick = false;
+    });
+  }, { passive: true });
 
   /* ---------- produto ---------- */
   var cur = null;
@@ -794,6 +810,7 @@
   function renderCart() {
     var n = count();
     var badge = $('#cart-count'); badge.textContent = n; badge.hidden = n === 0;
+    if (n !== barCount) { barCount = n; barAppears(); }
     $('#bar-left').textContent = 'Ver sacola (' + n + ')';
     $('#bar-right').textContent = fmt(total());
     syncBar();
