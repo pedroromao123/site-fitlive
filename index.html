@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#262425">
 <title>FITLIVE Fashion Wear | Rondonópolis</title>
-<meta name="description" content="FITLIVE Fashion Wear: roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e finalize pelo WhatsApp.">
+<meta name="description" content="FITLIVE Fashion Wear: roupas, acessórios e tênis em Rondonópolis. Escolha e pague pelo site.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -139,7 +139,9 @@
   .foot h3 { font-family: var(--body); font-weight: 600; font-size: 16px; color: var(--gold); letter-spacing: 0; margin-bottom: 10px; }
   .foot p, .foot li { color: var(--muted-d); font-size: 17px; }
   .foot a { color: #fff; }
-  .foot-note { border-top: 1px solid var(--line-d); padding: 18px 0 26px; color: var(--muted-d); font-size: 14px; }
+  .foot-note { border-top: 1px solid var(--line-d); padding: 18px 0 26px; color: var(--muted-d); font-size: 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; }
+  .linkbtn.tiny { font-size: 13px; color: var(--muted-d); opacity: .55; text-decoration: none; padding: 6px 0; }
+  .linkbtn.tiny:hover { opacity: 1; text-decoration: underline; }
   @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
 
   /* ---------- barra de sacola (celular): pílula compacta que some ao rolar para baixo ---------- */
@@ -340,7 +342,6 @@
   <div class="top-actions">
     <a class="toplink" href="#colecao">Coleção</a>
     <a class="toplink" href="#contato">Onde estamos</a>
-    <button type="button" class="cart-btn" id="adm-open" aria-label="Área da loja"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.4 7-5.4s6.2 1.8 7 5.4"/></svg><span class="t">Área da loja</span></button>
     <button type="button" class="cart-btn" id="cart-btn" aria-label="Abrir a sacola">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11l-1-12z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
       <span class="t">Sacola</span>
@@ -359,10 +360,9 @@
         <span class="ln"><span>Vale a pena</span></span>
         <span class="ln"><span>se vestir bem.</span></span>
       </h1>
-      <p class="sub">Roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e finalize o pedido pelo WhatsApp ou pague online.</p>
+      <p class="sub">Roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e pague online, com Pix ou cartão.</p>
       <div class="hero-actions">
         <a class="btn btn-gold" href="#colecao">Ver a coleção</a>
-        <button type="button" class="btn btn-line" data-whats="geral">Pedir pelo WhatsApp</button>
       </div>
     </div>
     <div class="collage" aria-hidden="false">
@@ -485,10 +485,9 @@
         <h3>Fale com a gente</h3>
         <p>WhatsApp: (66) 99620-1000</p>
         <p style="margin-top:8px">Instagram: <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer">@fitlivefashionwear</a></p>
-        <p style="margin-top:8px"><button type="button" class="linkbtn" id="adm-open-2">Área da loja, para funcionárias</button></p>
       </div>
     </div>
-    <p class="foot-note">Protótipo de demonstração. Produtos, fotos e preços são exemplos, e os botões de pagamento não cobram nada.</p>
+    <div class="foot-note"><p>Protótipo de demonstração. Produtos, fotos e preços são exemplos, e os botões de pagamento não cobram nada.</p><button type="button" class="linkbtn tiny" id="adm-open-2">Acesso da loja</button></div>
   </div>
 </footer>
 
@@ -596,7 +595,7 @@
         <output id="pm-qty" aria-live="polite">1</output>
         <button type="button" id="pm-plus" aria-label="Aumentar">+</button>
       </div>
-      <p class="pm-note">Retire na loja ou receba em casa. O pagamento é combinado no final do pedido.</p>
+      <p class="pm-note">Retire na loja ou receba em casa. O pagamento é feito no final do pedido, com Pix ou cartão.</p>
       <div class="pm-bar"><button type="button" class="btn btn-dark pm-add" id="pm-add">Adicionar à sacola</button></div>
     </div>
   </div>
@@ -652,7 +651,7 @@
 
   /* ---------- estado ---------- */
   var cart = [];                       // { id, name, price, size, qty, img }
-  var recv = 'retirada', pay = 'whatsapp', buyer = '', zone = '';
+  var recv = 'retirada', pay = 'pix', buyer = '', zone = '';
   function lineKey(l) { return l.id + '|' + l.size; }
   function count() { return cart.reduce(function (a, l) { return a + l.qty; }, 0); }
   function subtotal() { return cart.reduce(function (a, l) { return a + l.qty * l.price; }, 0); }
@@ -835,7 +834,6 @@
       '<label><input type="radio" name="recv" value="entrega"' + (recv === 'entrega' ? ' checked' : '') + '><span>Entrega em Rondonópolis<span class="sm">Escolha a região abaixo</span></span><span class="push">a partir de ' + fmt(ZONES.centro.fee) + '</span></label>' +
       (recv === 'entrega' ? '<div class="nm" style="margin-top:12px"><label for="zone">Região da entrega</label><select id="zone"><option value="">Escolha a região</option>' + Object.keys(ZONES).map(function (k) { return '<option value="' + k + '"' + (zone === k ? ' selected' : '') + '>' + ZONES[k].label + ' (' + fmt(ZONES[k].fee) + ')</option>'; }).join('') + '</select><p class="zone-note">Valores de exemplo. A loja define os bairros e as taxas. Frete grátis em compras acima de ' + fmt(FREE_OVER) + ' (exemplo).</p><p class="hint" id="zone-hint" aria-live="polite"></p></div>' : '') + '</fieldset>' +
       '<fieldset class="opt"><legend>Como você quer pagar?</legend>' +
-      '<label><input type="radio" name="pay" value="whatsapp"' + (pay === 'whatsapp' ? ' checked' : '') + '><span>Combinar pelo WhatsApp<span class="sm">Você envia o pedido e a loja confirma</span></span></label>' +
       '<label><input type="radio" name="pay" value="pix"' + (pay === 'pix' ? ' checked' : '') + '><span>Pix<span class="sm">Pague na hora, pelo celular</span></span></label>' +
       '<label><input type="radio" name="pay" value="cartao"' + (pay === 'cartao' ? ' checked' : '') + '><span>Cartão de crédito<span class="sm">Pagamento online seguro</span></span></label></fieldset>' +
       '<div class="nm"><label for="buyer">Seu nome (opcional)</label><input type="text" id="buyer" autocomplete="name" value="' + buyer.replace(/"/g, '&quot;') + '"></div>';
@@ -874,36 +872,17 @@
   $('#bar-btn').addEventListener('click', function () { openCart(this); });
 
   /* ---------- fechamento (simulado) ---------- */
-  function orderText() {
-    var lines = cart.map(function (l) { return '• ' + l.qty + 'x ' + l.name + ' (' + l.size + '), ' + fmt(l.qty * l.price); });
-    return 'Olá! Quero fazer um pedido pelo site:\n' + lines.join('\n') + '\n\nTotal: ' + fmt(total()) +
-      '\nRecebimento: ' + (recv === 'entrega' ? 'entrega em Rondonópolis (' + ZONES[zone].label + ')' : 'retirar na loja') +
-      '\nPagamento: ' + ({ whatsapp: 'combinar pelo WhatsApp', pix: 'Pix', cartao: 'cartão de crédito' })[pay] +
-      (buyer.trim() ? '\nNome: ' + buyer.trim() : '');
-  }
-  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
-  function showResult(mode) {
+  function showResult() {
     var title = $('#res-title'), sub = $('#res-sub'), content = $('#res-content'), note = $('#res-note');
-    if (mode === 'geral') {
-      title.textContent = 'Pedir pelo WhatsApp';
-      sub.textContent = 'Esta é a mensagem que chegaria no WhatsApp da loja:';
-      content.innerHTML = '<div class="wa">' + esc('Olá! Vi o site da FITLIVE e gostaria de saber mais sobre as peças.') + '</div>';
-      note.textContent = 'Na versão final, este botão abre a conversa com a loja, com a mensagem já escrita.';
-    } else if (pay === 'pix') {
-      title.textContent = 'Pagar com Pix';
-      sub.textContent = 'Total do pedido: ' + fmt(total());
-      content.innerHTML = '<div class="pixbox"><div class="qr" aria-hidden="true"></div><p>Aqui apareceria o QR Code do Pix da loja.</p><code>Código copia e cola da demonstração</code></div>';
-      note.textContent = 'Demonstração: nenhum pagamento foi feito. Na versão final, o Pix cai direto na conta da loja.';
-    } else if (pay === 'cartao') {
+    sub.textContent = 'Total do pedido: ' + fmt(total());
+    if (pay === 'cartao') {
       title.textContent = 'Pagar com cartão';
-      sub.textContent = 'Total do pedido: ' + fmt(total());
       content.innerHTML = '<div class="pixbox"><p>Aqui abriria a tela segura de pagamento com cartão, com as bandeiras e o parcelamento que a loja oferecer.</p></div>';
       note.textContent = 'Demonstração: nenhum dado de cartão é pedido e nenhum pagamento foi feito.';
     } else {
-      title.textContent = 'Pedido pelo WhatsApp';
-      sub.textContent = 'Esta é a mensagem que chegaria no WhatsApp da loja:';
-      content.innerHTML = '<div class="wa">' + esc(orderText()) + '</div>';
-      note.textContent = 'Na versão final, este botão abre a conversa com a loja, com o pedido pronto para enviar.';
+      title.textContent = 'Pagar com Pix';
+      content.innerHTML = '<div class="pixbox"><div class="qr" aria-hidden="true"></div><p>Aqui apareceria o QR Code do Pix da loja.</p><code>Código copia e cola da demonstração</code></div>';
+      note.textContent = 'Demonstração: nenhum pagamento foi feito. Na versão final, o Pix cai direto na conta da loja.';
     }
     openLayer($('#layer-result'), $('#checkout'));
   }
@@ -913,18 +892,12 @@
       var zs = $('#zone'); if (zs) zs.focus();
       return;
     }
-    var cartLayer = $('#layer-cart');
-    closeLayer(cartLayer, true);
-    showResult(pay);
+    closeLayer($('#layer-cart'), true);
+    showResult();
   });
   $('#res-done').addEventListener('click', function () {
-    var wasOrder = $('#res-title').textContent !== 'Pedir pelo WhatsApp';
     closeLayer($('#layer-result'));
-    if (wasOrder) { cart = []; renderCart(); toast('Pedido de demonstração concluído.'); }
-  });
-  document.addEventListener('click', function (e) {
-    var w = e.target.closest('[data-whats]');
-    if (w) { lastFocus = w; showResult('geral'); }
+    cart = []; renderCart(); toast('Pedido de demonstração concluído.');
   });
 
   /* ---------- cards ---------- */
@@ -1135,8 +1108,12 @@
     if (admin.in) renderList();
     openLayer($('#layer-admin'), opener);
   }
-  $('#adm-open').addEventListener('click', function () { openAdmin(this); });
   $('#adm-open-2').addEventListener('click', function () { openAdmin(this); });
+  function checkHash() {
+    if (location.hash === '#area-da-loja') { openAdmin(null); history.replaceState(null, '', location.pathname + location.search); }
+  }
+  checkHash();
+  window.addEventListener('hashchange', checkHash);
   $('#adm-form').addEventListener('submit', function (e) { e.preventDefault(); admin.in = true; renderList(); showView('adm-home'); });
   $('#adm-logout').addEventListener('click', function () { admin.in = false; showView('adm-login'); });
 
