@@ -224,11 +224,15 @@
   .nm { margin-top: 24px; }
   .nm label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 17px; }
   .nm input { width: 100%; min-height: 52px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line-l); font-size: 17px; font-family: inherit; background: var(--white); color: var(--ink); }
-  .cart-foot { padding: 18px 24px calc(18px + env(safe-area-inset-bottom, 0px) + var(--ios-bar, 0px)); border-top: 1px solid var(--line-l); background: var(--white); }
-  .tot { display: flex; justify-content: space-between; font-size: 16px; color: var(--muted-l); padding: 2px 0; }
-  .tot.big { font-size: 22px; color: var(--ink); font-weight: 600; padding-top: 10px; }
-  .cart-foot .btn { width: 100%; margin-top: 14px; }
-  .demo-line { margin-top: 10px; text-align: center; font-size: 13px; color: var(--muted-l); }
+  .cart-foot { display: flex; align-items: center; gap: 16px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line-l); background: var(--white); }
+  #layer-cart { padding-bottom: var(--ios-bar, 0px); }
+  .foot-sum { display: flex; flex-direction: column; line-height: 1.1; flex: none; }
+  .foot-lbl { font-size: 13px; color: var(--muted-l); }
+  .foot-sum b { font-size: 22px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .cart-foot .btn { flex: 1; min-height: 52px; padding: 0 16px; }
+  .sum { margin-top: 22px; padding-top: 10px; border-top: 1px solid var(--line-l); }
+  .tot { display: flex; justify-content: space-between; font-size: 16px; color: var(--muted-l); padding: 3px 0; }
+  .demo-line { margin-top: 14px; text-align: center; font-size: 13px; color: var(--muted-l); }
 
   #layer-result h2 { font-size: 34px; padding-right: 44px; }
   .res-sub { margin-top: 8px; color: var(--muted-l); }
@@ -611,11 +615,8 @@
     </div>
     <div class="cart-body" id="cart-body"></div>
     <div class="cart-foot" id="cart-foot" hidden>
-      <div class="tot"><span>Subtotal</span><span id="t-sub"></span></div>
-      <div class="tot"><span>Entrega</span><span id="t-del"></span></div>
-      <div class="tot big"><span>Total</span><span id="t-total"></span></div>
+      <div class="foot-sum"><span class="foot-lbl">Total</span><b id="t-total"></b></div>
       <button type="button" class="btn btn-gold" id="checkout">Finalizar pedido</button>
-      <p class="demo-line">Demonstração: nenhum pagamento é feito.</p>
     </div>
   </div>
 </div>
@@ -837,7 +838,7 @@
       '<label><input type="radio" name="pay" value="pix"' + (pay === 'pix' ? ' checked' : '') + '><span>Pix<span class="sm">Pague na hora, pelo celular</span></span></label>' +
       '<label><input type="radio" name="pay" value="cartao"' + (pay === 'cartao' ? ' checked' : '') + '><span>Cartão de crédito<span class="sm">Pagamento online seguro</span></span></label></fieldset>' +
       '<div class="nm"><label for="buyer">Seu nome (opcional)</label><input type="text" id="buyer" autocomplete="name" value="' + buyer.replace(/"/g, '&quot;') + '"></div>';
-    body.innerHTML = items + opts;
+    body.innerHTML = items + opts + '<div class="sum"><div class="tot"><span>Subtotal</span><span id="t-sub"></span></div><div class="tot"><span>Entrega</span><span id="t-del"></span></div></div><p class="demo-line">Demonstração: nenhum pagamento é feito.</p>';
     foot.hidden = false;
     $('#t-sub').textContent = fmt(subtotal());
     $('#t-del').textContent = (recv === 'entrega' && !zone) ? 'Escolha a região' : (delivery() ? fmt(delivery()) : 'Grátis');
