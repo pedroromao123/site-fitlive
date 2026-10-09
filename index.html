@@ -263,12 +263,13 @@
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   #layer-admin { align-items: center; justify-content: center; padding: 20px; }
-  #layer-admin .panel { width: min(1040px, 100%); height: min(92vh, 900px); display: flex; flex-direction: column; overflow: hidden; --from: translateY(18px) scale(.98); }
+  /* overflow: clip impede que o navegador "role" o painel inteiro ao focar um campo (era o que criava a faixa branca) */
+  #layer-admin .panel { width: min(1040px, 100%); height: min(92vh, 900px); display: flex; flex-direction: column; overflow: hidden; overflow: clip; --from: translateY(18px) scale(.98); }
   .adm-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px 16px 26px; border-bottom: 1px solid var(--line-l); background: var(--white); }
   .adm-head h2 { font-size: 30px; }
   .adm-head .x { position: static; background: rgba(38,36,37,.07); }
   .adm-head-r { display: flex; align-items: center; gap: 14px; }
-  .adm-body { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: clamp(20px, 3vw, 36px); padding-bottom: calc(clamp(20px, 3vw, 36px) + var(--ios-bar, 0px)); }
+  .adm-body { position: relative; flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: clamp(20px, 3vw, 36px); padding-bottom: calc(clamp(20px, 3vw, 36px) + var(--ios-bar, 0px)); }
   .adm-center { max-width: 440px; margin: 0 auto; padding-top: 16px; }
   .adm-h { font-family: var(--display); font-weight: 300; font-size: 32px; line-height: 1.1; }
   .adm-p { color: var(--muted-l); margin-top: 8px; }
@@ -294,7 +295,7 @@
   @media (max-width: 760px) { .prow { grid-template-columns: 56px minmax(0, 1fr); } .pact { grid-column: 1 / -1; justify-content: flex-start; } }
 
   .nv { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 48px); margin-top: 18px; align-items: start; }
-  .nvs { margin-bottom: 26px; }
+  .nvs { position: relative; margin-bottom: 26px; }
   .nvs h4 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; }
   .nvs h4 span { width: 30px; height: 30px; border-radius: 50%; background: var(--char); color: #fff; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .drop { position: relative; display: flex; align-items: center; justify-content: center; min-height: 180px; border: 2px dashed var(--line-l); border-radius: 14px; background: var(--white); cursor: pointer; overflow: hidden; text-align: center; padding: 18px; }
@@ -306,7 +307,9 @@
   .drop.has .drop-t b { font-size: 15px; font-weight: 500; }
   .nvs .btn-outline { margin-top: 12px; }
   .pills { display: flex; flex-wrap: wrap; gap: 10px; }
-  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  /* o botão invisível fica preso dentro da própria pílula, assim o navegador não sai rolando o painel ao tocar */
+  .pill { position: relative; display: inline-flex; }
+  .pill input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
   .pill span { display: inline-flex; align-items: center; justify-content: center; min-width: 56px; min-height: 52px; padding: 0 18px; border: 1px solid var(--line-l); border-radius: 999px; background: var(--white); font-size: 17px; font-weight: 500; cursor: pointer; transition: background .15s ease, color .15s ease; }
   .pill input:checked + span { background: var(--char); border-color: var(--char); color: #fff; }
   .pill input:focus-visible + span { outline: 3px solid var(--gold-deep); outline-offset: 3px; }
@@ -1055,6 +1058,9 @@
   /* ---------- área da loja (demonstração) ---------- */
   var admin = { in: false }, editing = null, nv = null, lastNew = null;
   var VIEWS = ['adm-login', 'adm-home', 'adm-new', 'adm-done'];
+  // segurança extra para navegadores antigos: o painel em si nunca deve rolar, só o miolo
+  var admPanel = $('#layer-admin .panel');
+  admPanel.addEventListener('scroll', function () { if (admPanel.scrollTop || admPanel.scrollLeft) { admPanel.scrollTop = 0; admPanel.scrollLeft = 0; } });
   function showView(id) {
     VIEWS.forEach(function (v) { $('#' + v).hidden = v !== id; });
     $('#adm-logout').hidden = id === 'adm-login';
