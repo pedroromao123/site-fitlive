@@ -326,6 +326,66 @@
   body.has-bar .toast { bottom: calc(96px + var(--ios-bar, 0px)); }
   .fly { position: fixed; z-index: 90; object-fit: cover; border-radius: 8px; pointer-events: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
 
+  /* ---------- painéis clicáveis ---------- */
+  .sec.tight { padding-top: clamp(40px, 5vw, 64px); padding-bottom: 0; }
+  .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+  .banners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+  .panel-link { position: relative; display: block; width: 100%; padding: 0; border: 0; overflow: hidden; background: var(--char); color: #fff; text-decoration: none; font: inherit; cursor: pointer; }
+  .tiles .panel-link { aspect-ratio: 4 / 3; }
+  .banners .panel-link { aspect-ratio: 16 / 10; }
+  .panel-link img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transition: transform .8s ease; }
+  .panel-link::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,18,19,.12) 20%, rgba(20,18,19,.58)); }
+  .pl-t { position: absolute; left: 0; right: 0; top: 50%; z-index: 1; transform: translateY(-50%); padding: 0 16px; text-align: center; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 44px); letter-spacing: .08em; text-transform: uppercase; line-height: 1.05; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+  .banners .pl-t { font-size: clamp(30px, 4vw, 58px); }
+  .pl-s { position: absolute; left: 0; right: 0; bottom: 18px; z-index: 1; text-align: center; font-size: 15px; font-weight: 500; }
+  .pl-s span { display: inline-block; padding: 6px 16px; border: 1px solid rgba(255,255,255,.75); border-radius: 999px; }
+  @media (max-width: 760px) {
+    .tiles { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 calc(-1 * clamp(20px, 4vw, 48px)); padding: 0 clamp(20px, 4vw, 48px); scroll-padding: 0 clamp(20px, 4vw, 48px); }
+    .tiles::-webkit-scrollbar { display: none; }
+    .tiles .panel-link { flex: none; width: 76%; aspect-ratio: 4 / 5; scroll-snap-align: start; }
+    .banners { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- cores ---------- */
+  .dot { width: 22px; height: 22px; border-radius: 50%; flex: none; border: 1px solid rgba(38,36,37,.28); background: var(--c, conic-gradient(#d9c7a7, #6b1e2e, #3b5ba5, #2f8a4a, #d9c7a7)); }
+  .colors { display: flex; flex-wrap: wrap; gap: 10px; }
+  .color { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 18px 0 12px; border-radius: 999px; border: 1px solid var(--line-l); background: var(--white); color: var(--ink); font-size: 16px; font-weight: 500; cursor: pointer; }
+  .color[aria-pressed="true"] { border-color: var(--char); box-shadow: inset 0 0 0 1px var(--char); }
+  .card .cdots { display: flex; gap: 6px; margin-top: 8px; }
+  .card .cdots .dot { width: 14px; height: 14px; }
+  .pill .dot { width: 18px; height: 18px; margin-right: 8px; }
+  .addrow { display: flex; gap: 8px; margin-top: 12px; }
+  .addrow input { flex: 1; min-width: 0; }
+  .nvs .addrow .btn { margin-top: 0; min-height: 54px; }
+
+  /* ---------- várias fotos ---------- */
+  .pimg img.alt { opacity: 0; transition: opacity .45s ease; }
+  .pcount { position: absolute; right: 10px; bottom: 10px; z-index: 2; background: rgba(38,36,37,.78); color: #fff; font-size: 13px; font-weight: 500; padding: 3px 10px; border-radius: 999px; }
+  .gal { position: absolute; inset: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .gal::-webkit-scrollbar { display: none; }
+  .slide { position: relative; flex: none; width: 100%; height: 100%; overflow: hidden; scroll-snap-align: start; }
+  .slide img.fg { object-fit: contain; object-position: 50% 50%; }
+  .dots { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 2; display: flex; justify-content: center; gap: 2px; }
+  .dots button { width: 30px; height: 30px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .dots button::before { content: ""; width: 9px; height: 9px; border-radius: 999px; background: rgba(255,255,255,.55); box-shadow: 0 0 0 1px rgba(0,0,0,.18); transition: width .2s ease, background .2s ease; }
+  .dots button[aria-current="true"]::before { width: 22px; background: #fff; }
+  .gal-arrow { position: absolute; top: 50%; z-index: 2; width: 46px; height: 46px; margin-top: -23px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: var(--ink); font-size: 26px; line-height: 1; cursor: pointer; display: none; align-items: center; justify-content: center; }
+  .gal-arrow.prev { left: 12px; }
+  .gal-arrow.next { right: 12px; }
+  .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .shot { position: relative; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; background: var(--char); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .shot .cap { position: absolute; left: 6px; top: 6px; background: var(--gold); color: var(--char-deep); font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; }
+  .shot .rmx { position: absolute; right: 4px; top: 4px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(255,255,255,.94); color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .shot .mkcap { position: absolute; left: 6px; right: 6px; bottom: 6px; min-height: 34px; border-radius: 999px; border: 0; background: rgba(255,255,255,.94); color: var(--ink); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .shot-add { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; aspect-ratio: 4 / 5; padding: 8px; border: 2px dashed var(--line-l); border-radius: 12px; background: var(--white); cursor: pointer; text-align: center; font-size: 15px; font-weight: 600; }
+  .shot-add b { font-size: 30px; font-weight: 300; line-height: 1; }
+  .shot-add small { font-size: 13px; font-weight: 400; color: var(--muted-l); }
+
+  /* ---------- WhatsApp ---------- */
+  .btn-wa { background: #1E7A4D; color: #fff; }
+  .btn-wa svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+
   @media (hover: hover) {
     .btn-gold:hover { background: #D3BC8E; transform: translateY(-2px); }
     .btn-dark:hover { background: var(--char-deep); transform: translateY(-2px); }
@@ -341,6 +401,12 @@
     .card.soldout .btn-outline:hover { background: transparent; color: var(--ink); }
     .pact button:hover { border-color: var(--ink); }
     .drop:hover, .drop:focus-within { border-color: var(--gold-deep); }
+    .panel-link:hover img { transform: scale(1.05); }
+    .card:hover .pimg img.alt { opacity: 1; }
+    .pm-img.multi .gal-arrow { display: flex; }
+    .btn-wa:hover { background: #16603C; transform: translateY(-2px); }
+    .color:hover { border-color: var(--ink); }
+    .shot-add:hover { border-color: var(--gold-deep); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -351,7 +417,7 @@
 </head>
 <body>
 
-<div class="notice">Protótipo de demonstração: produtos, fotos e preços são exemplos e nenhum pagamento é feito.</div>
+<div class="notice">Protótipo de demonstração: produtos, fotos e preços são exemplos.</div>
 
 <header class="top">
   <a class="brand" href="#inicio" aria-label="FITLIVE Fashion Wear, início"><b>FITLIVE</b><i>Fashion Wear</i></a>
@@ -376,7 +442,7 @@
         <span class="ln"><span>Vale a pena</span></span>
         <span class="ln"><span>se vestir bem.</span></span>
       </h1>
-      <p class="sub">Roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e pague online, com Pix ou cartão.</p>
+      <p class="sub">Roupas, acessórios e tênis em Rondonópolis. Escolha pelo site e finalize o pedido pelo WhatsApp, com Pix ou cartão.</p>
       <div class="hero-actions">
         <a class="btn btn-gold" href="#colecao">Ver a coleção</a>
       </div>
@@ -399,6 +465,17 @@
   </div>
 </div>
 
+<!-- ============ PAINÉIS ============ -->
+<section class="sec tight" id="destaques" aria-label="Destaques">
+  <div class="in">
+    <div class="tiles">
+      <button type="button" class="panel-link" data-go="lancamentos"><img src="img/ig-1.jpg" alt="" loading="lazy"><span class="pl-t">Lançamentos</span></button>
+      <button type="button" class="panel-link" data-go="roupas"><img src="img/p-bordo.jpg" alt="" loading="lazy"><span class="pl-t">Roupas</span></button>
+      <button type="button" class="panel-link" data-go="tenis"><img src="img/p-skechers.jpg" alt="" loading="lazy" style="object-position:50% 60%"><span class="pl-t">Tênis</span></button>
+    </div>
+  </div>
+</section>
+
 <!-- ============ COLEÇÃO ============ -->
 <section class="sec" id="colecao">
   <div class="in">
@@ -410,6 +487,7 @@
       <div>
         <div class="chips" role="group" aria-label="Filtrar por categoria">
           <button type="button" class="chip" data-filter="todos" aria-pressed="true">Todos</button>
+          <button type="button" class="chip" data-filter="lancamentos" aria-pressed="false" hidden>Lançamentos</button>
           <button type="button" class="chip" data-filter="roupas" aria-pressed="false">Roupas</button>
           <button type="button" class="chip" data-filter="tenis" aria-pressed="false">Tênis</button>
           <button type="button" class="chip" data-filter="acessorios" aria-pressed="false" hidden>Acessórios</button>
@@ -417,51 +495,65 @@
       </div>
     </div>
     <div class="brandbar" id="brandbar" hidden><span class="bl">Marca</span><div class="chips scroll" id="brand-chips" role="group" aria-label="Filtrar por marca"></div></div>
-    <p class="count-note" id="count-note" aria-live="polite" style="margin-bottom:22px">8 peças</p>
+    <p class="count-note" id="count-note" aria-live="polite" style="margin-bottom:22px">9 peças</p>
 
     <div class="grid" id="grid">
-      <article class="card" data-id="regata" data-brand="Colcci" data-name="Regata Colcci Sport" data-price="169.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="marrom" data-colors="Marrom" data-more="img/ig-5.jpg" data-brand="" data-name="Conjunto top e calça flare marrom" data-price="279.9" data-cat="roupas" data-sizes="P,M,G,GG">
+        <span class="tag">Lançamento</span>
+        <button type="button" class="pimg" data-open aria-label="Ver Conjunto top e calça flare marrom"><img class="fg" src="img/ig-6.jpg" width="300" height="292" alt="Conjunto fitness marrom, top e calça flare"></button>
+        <h3>Conjunto top e calça flare marrom</h3><p class="price">R$ 279,90</p>
+        <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
+      </article>
+      <article class="card" data-id="regata" data-colors="Azul marinho,Preto" data-brand="Colcci" data-name="Regata Colcci Sport" data-price="169.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <button type="button" class="pimg" data-open data-top aria-label="Ver Regata Colcci Sport"><img class="fg" src="img/hero-a.jpg" width="487" height="742" alt="Regata azul Colcci Sport"></button>
         <p class="brand">Colcci</p><h3>Regata Colcci Sport</h3><p class="price">R$ 169,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="cropped" data-brand="Lança Perfume" data-name="Cropped Lança Perfume" data-price="119.9" data-cat="roupas" data-sizes="P,M,G">
+      <article class="card" data-id="cropped" data-colors="Bege,Branco" data-brand="Lança Perfume" data-name="Cropped Lança Perfume" data-price="119.9" data-cat="roupas" data-sizes="P,M,G">
         <button type="button" class="pimg" data-open data-top aria-label="Ver Cropped Lança Perfume"><img class="fg" src="img/hero-b.jpg" width="472" height="739" alt="Cropped bege Lança Perfume"></button>
         <p class="brand">Lança Perfume</p><h3>Cropped Lança Perfume</h3><p class="price">R$ 119,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="bordo" data-brand="" data-name="Conjunto top e legging bordô" data-price="259.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="bordo" data-colors="Bordô" data-brand="" data-name="Conjunto top e legging bordô" data-price="259.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <button type="button" class="pimg" data-open aria-label="Ver Conjunto top e legging bordô"><img class="fg" src="img/p-bordo.jpg" width="424" height="530" alt="Conjunto fitness bordô, top e legging"></button>
         <h3>Conjunto top e legging bordô</h3><p class="price">R$ 259,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="nikeverde" data-brand="Nike" data-name="Conjunto Nike verde, camiseta e short" data-price="249.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="nikeverde" data-colors="Verde" data-brand="Nike" data-name="Conjunto Nike verde, camiseta e short" data-price="249.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <button type="button" class="pimg" data-open aria-label="Ver Conjunto Nike verde"><img class="fg" src="img/p-nike-verde.jpg" width="300" height="354" alt="Camiseta verde e short cinza Nike"></button>
         <p class="brand">Nike</p><h3>Conjunto Nike verde, camiseta e short</h3><p class="price">R$ 249,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="active" data-brand="" data-name="Legging Active Soul" data-price="189.9" data-cat="roupas" data-sizes="P,M,G,GG">
+      <article class="card" data-id="active" data-colors="Roxo,Preto" data-brand="" data-name="Legging Active Soul" data-price="189.9" data-cat="roupas" data-sizes="P,M,G,GG">
         <span class="tag">Lançamento</span>
         <button type="button" class="pimg" data-open aria-label="Ver Legging Active Soul"><img class="fg" src="img/p-active-soul.jpg" width="300" height="354" alt="Legging Active Soul, lançamento"></button>
         <h3>Legging Active Soul</h3><p class="price">R$ 189,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="skechers" data-brand="Skechers" data-name="Tênis Skechers rosa" data-price="459.9" data-cat="tenis" data-sizes="34,35,36,37,38,39">
+      <article class="card" data-id="skechers" data-colors="Rosa" data-brand="Skechers" data-name="Tênis Skechers rosa" data-price="459.9" data-cat="tenis" data-sizes="34,35,36,37,38,39">
         <button type="button" class="pimg" data-open aria-label="Ver Tênis Skechers rosa"><img class="fg" src="img/p-skechers.jpg" width="300" height="292" alt="Tênis Skechers rosa sendo amarrado"></button>
         <p class="brand">Skechers</p><h3>Tênis Skechers rosa</h3><p class="price">R$ 459,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="v2k" data-brand="Nike" data-name="Tênis Nike V2K Run" data-price="899.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
+      <article class="card" data-id="v2k" data-colors="Bege" data-brand="Nike" data-name="Tênis Nike V2K Run" data-price="899.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
         <button type="button" class="pimg" data-open data-fit="contain" aria-label="Ver Tênis Nike V2K Run"><img class="bg" src="img/p-v2k.jpg" alt="" aria-hidden="true"><img class="fg" src="img/p-v2k.jpg" width="524" height="476" alt="Tênis Nike V2K Run bege"></button>
         <p class="brand">Nike</p><h3>Tênis Nike V2K Run</h3><p class="price">R$ 899,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
-      <article class="card" data-id="court" data-brand="Nike" data-name="Tênis Nike Court Legacy Lift" data-price="649.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
+      <article class="card" data-id="court" data-colors="Branco" data-brand="Nike" data-name="Tênis Nike Court Legacy Lift" data-price="649.9" data-cat="tenis" data-sizes="35,36,37,38,39,40,41">
         <button type="button" class="pimg" data-open data-fit="contain" aria-label="Ver Tênis Nike Court Legacy Lift"><img class="bg" src="img/p-court.jpg" alt="" aria-hidden="true"><img class="fg" src="img/p-court.jpg" width="558" height="476" alt="Tênis Nike Court Legacy Lift branco"></button>
         <p class="brand">Nike</p><h3>Tênis Nike Court Legacy Lift</h3><p class="price">R$ 649,90</p>
         <button type="button" class="btn btn-outline" data-open>Escolher tamanho</button>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ============ PAINÉIS LARGOS ============ -->
+<section class="sec" id="mais" aria-label="Mais da loja" style="padding-top:0">
+  <div class="in banners">
+    <button type="button" class="panel-link" data-go="todos" data-brand-go="Nike"><img src="img/p-nike-verde.jpg" alt="" loading="lazy"><span class="pl-t">Nike</span><span class="pl-s"><span>Ver peças da marca</span></span></button>
+    <a class="panel-link" href="#contato"><img src="img/ig-6.jpg" alt="" loading="lazy"><span class="pl-t">Conheça a loja</span><span class="pl-s"><span>R. Barão do Rio Branco, 318</span></span></a>
   </div>
 </section>
 
@@ -504,7 +596,7 @@
         <p style="margin-top:8px">Instagram: <a href="https://www.instagram.com/fitlivefashionwear/" target="_blank" rel="noopener noreferrer">@fitlivefashionwear</a></p>
       </div>
     </div>
-    <div class="foot-note"><p>Protótipo de demonstração. Produtos, fotos e preços são exemplos, e os botões de pagamento não cobram nada.</p><button type="button" class="linkbtn tiny" id="adm-open-2">Acesso da loja</button></div>
+    <div class="foot-note"><p>Protótipo de demonstração. Produtos, fotos e preços são exemplos.</p><button type="button" class="linkbtn tiny" id="adm-open-2">Acesso da loja</button></div>
   </div>
 </footer>
 
@@ -549,13 +641,11 @@
         <div class="nv">
           <form id="nv-form" novalidate>
             <div class="nvs">
-              <h4><span>1</span>Foto da peça</h4>
-              <label class="drop" id="nv-drop" for="nv-file">
-                <img id="nv-prev" alt="" hidden>
-                <span class="drop-t"><b id="nv-drop-b">Tirar foto ou escolher da galeria</b><small>Toque aqui</small></span>
-              </label>
-              <input class="sr" type="file" id="nv-file" accept="image/*">
-              <button type="button" class="btn btn-outline" id="nv-sample">Usar uma foto de exemplo</button>
+              <h4><span>1</span>Fotos da peça</h4>
+              <p class="zone-note" style="margin:-4px 0 12px">Até 6 fotos: de frente, de costas, de lado e detalhes. A primeira é a capa.</p>
+              <div class="shots" id="nv-shots"></div>
+              <input class="sr" type="file" id="nv-file" accept="image/*" multiple>
+              <button type="button" class="btn btn-outline" id="nv-sample">Usar fotos de exemplo</button>
             </div>
             <div class="nvs"><h4><span>2</span>Nome da peça</h4><input type="text" id="nv-name" autocomplete="off" placeholder="Ex: Legging cintura alta preta"></div>
             <div class="nvs">
@@ -566,9 +656,14 @@
                 <p class="zone-note" id="nv-brand-hint" aria-live="polite"></p>
               </div>
             </div>
-            <div class="nvs"><h4><span>4</span>Preço</h4><input type="text" id="nv-price" inputmode="numeric" autocomplete="off" placeholder="R$ 0,00"></div>
             <div class="nvs">
-              <h4><span>5</span>Categoria</h4>
+              <h4><span>4</span>Cores que tem</h4>
+              <div class="pills" id="nv-colors" role="group" aria-label="Cores"></div>
+              <div class="addrow"><input type="text" id="nv-color-text" autocomplete="off" placeholder="Outra cor (ex.: Verde água)" aria-label="Outra cor"><button type="button" class="btn btn-outline" id="nv-color-add">Adicionar</button></div>
+            </div>
+            <div class="nvs"><h4><span>5</span>Preço</h4><input type="text" id="nv-price" inputmode="numeric" autocomplete="off" placeholder="R$ 0,00"></div>
+            <div class="nvs">
+              <h4><span>6</span>Categoria</h4>
               <div class="pills" role="radiogroup" aria-label="Categoria">
                 <label class="pill"><input type="radio" name="nvcat" value="roupas" checked><span>Roupas</span></label>
                 <label class="pill"><input type="radio" name="nvcat" value="tenis"><span>Tênis</span></label>
@@ -576,7 +671,7 @@
               </div>
             </div>
             <div class="nvs">
-              <h4><span>6</span>Tamanhos que tem</h4>
+              <h4><span>7</span>Tamanhos que tem</h4>
               <div class="pills" id="nv-sizes"></div>
               <button type="button" class="rm" id="nv-all" style="margin-top:8px">Marcar todos</button>
             </div>
@@ -612,6 +707,8 @@
       <p class="pm-brand" id="pm-brand" hidden></p>
       <h2 id="pm-title"></h2>
       <p class="pm-price" id="pm-price"></p>
+      <p class="lbl" id="pm-colors-label">Cor</p>
+      <div class="colors" id="pm-colors" role="group" aria-labelledby="pm-colors-label"></div>
       <p class="lbl" id="pm-sizes-label">Tamanho</p>
       <div class="sizes" id="pm-sizes" role="group" aria-labelledby="pm-sizes-label"></div>
       <p class="hint" id="pm-hint" aria-live="polite"></p>
@@ -621,7 +718,7 @@
         <output id="pm-qty" aria-live="polite">1</output>
         <button type="button" id="pm-plus" aria-label="Aumentar">+</button>
       </div>
-      <p class="pm-note">Retire na loja ou receba em casa. O pagamento é feito no final do pedido, com Pix ou cartão.</p>
+      <p class="pm-note">Retire na loja ou receba em casa. O pedido é enviado para o WhatsApp da loja, e o pagamento é feito com Pix ou cartão.</p>
       <div class="pm-bar"><button type="button" class="btn btn-dark pm-add" id="pm-add">Adicionar à sacola</button></div>
     </div>
   </div>
@@ -638,7 +735,7 @@
     <div class="cart-body" id="cart-body"></div>
     <div class="cart-foot" id="cart-foot" hidden>
       <div class="foot-sum"><span class="foot-lbl">Total</span><b id="t-total"></b></div>
-      <button type="button" class="btn btn-gold" id="checkout">Finalizar pedido</button>
+      <button type="button" class="btn btn-wa" id="checkout"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3z"/></svg>Enviar pelo WhatsApp</button>
     </div>
   </div>
 </div>
@@ -652,7 +749,7 @@
     <p class="res-sub" id="res-sub"></p>
     <div id="res-content"></div>
     <p class="res-note" id="res-note"></p>
-    <button type="button" class="btn btn-dark" id="res-done">Entendi</button>
+    <button type="button" class="btn btn-dark" id="res-done">Pronto, já enviei</button>
   </div>
 </div>
 
@@ -671,11 +768,16 @@
   function fmt(n) { return money.format(n); }
   var ZONES = { centro: { label: 'Centro e arredores', fee: 8 }, proximos: { label: 'Bairros próximos', fee: 12 }, afastados: { label: 'Bairros mais afastados', fee: 18 } };
   var FREE_OVER = 500;
+  // WhatsApp que recebe os pedidos. Com mais de um número, cada pedido vai para um deles (rodízio).
+  var WHATSAPP = ['5566996201000'];
+  var DEMO = true;   // marca a mensagem como teste enquanto o site for protótipo
+  var COLOR_HEX = { preto: '#1d1c1c', branco: '#fbfaf8', offwhite: '#efe9de', bege: '#d9c7a7', nude: '#d8b39a', cinza: '#9a9898', azul: '#3b5ba5', azulmarinho: '#1f2a44', azulclaro: '#9cc3e6', rosa: '#e9a7b7', verde: '#2f8a4a', verdeagua: '#8fd3c1', vermelho: '#c0322f', bordo: '#6b1e2e', vinho: '#5a1726', marrom: '#6e4630', caramelo: '#a8703c', roxo: '#5b4a7a', lilas: '#b9a3d6', amarelo: '#e4c443', laranja: '#e07a35' };
+  function dotHtml(name) { var hx = COLOR_HEX[brandKey(name)]; return '<span class="dot"' + (hx ? ' style="--c:' + hx + '"' : '') + ' aria-hidden="true"></span>'; }
 
   /* ---------- estado ---------- */
-  var cart = [];                       // { id, name, price, size, qty, img }
-  var recv = 'retirada', pay = 'pix', buyer = '', zone = '';
-  function lineKey(l) { return l.id + '|' + l.size; }
+  var cart = [];                       // { id, name, price, size, color, qty, img }
+  var recv = 'retirada', pay = 'pix', buyer = '', zone = '', addr = '';
+  function lineKey(l) { return l.id + '|' + l.size + '|' + (l.color || ''); }
   function count() { return cart.reduce(function (a, l) { return a + l.qty; }, 0); }
   function subtotal() { return cart.reduce(function (a, l) { return a + l.qty * l.price; }, 0); }
   function delivery() {
@@ -755,33 +857,64 @@
 
   /* ---------- produto ---------- */
   var cur = null;
-  function imgsHtml(card) {
-    var pimg = $('.pimg', card);
-    var fg = $('img.fg', card);
-    var html = '<img class="bg" src="' + fg.getAttribute('src') + '" alt="" aria-hidden="true">';
-    html += '<img class="fg" src="' + fg.getAttribute('src') + '" alt="' + (fg.getAttribute('alt') || '') + '">';
-    return { html: html, fit: 'contain', top: false };
+  function galleryHtml(p) {
+    var list = p.imgs, n = list.length;
+    var h = '<div class="gal" id="pm-gal">' + list.map(function (src, i) {
+      return '<div class="slide"><img class="bg" src="' + src + '" alt="" aria-hidden="true"><img class="fg" src="' + src + '" alt="' + escA(p.name) + (n > 1 ? ', foto ' + (i + 1) + ' de ' + n : '') + '"></div>';
+    }).join('') + '</div>';
+    if (n > 1) {
+      h += '<button type="button" class="gal-arrow prev" data-gal="-1" aria-label="Foto anterior">‹</button><button type="button" class="gal-arrow next" data-gal="1" aria-label="Próxima foto">›</button>';
+      h += '<div class="dots">' + list.map(function (_, i) { return '<button type="button" data-dot="' + i + '" aria-label="Foto ' + (i + 1) + '"' + (i === 0 ? ' aria-current="true"' : '') + '></button>'; }).join('') + '</div>';
+    }
+    return h;
+  }
+  function galIndex() { var g = $('#pm-gal'); return g && g.clientWidth ? Math.round(g.scrollLeft / g.clientWidth) : 0; }
+  function galGo(i) {
+    var g = $('#pm-gal'); if (!g) return;
+    var n = g.children.length; i = (i + n) % n;
+    g.scrollTo({ left: i * g.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  $('#pm-img').addEventListener('click', function (e) {
+    var d = e.target.closest('[data-dot]'); if (d) { galGo(+d.getAttribute('data-dot')); return; }
+    var a = e.target.closest('[data-gal]'); if (a) galGo(galIndex() + (+a.getAttribute('data-gal')));
+  });
+  function addLabel() {
+    var parts = [cur.size, cur.color].filter(Boolean);
+    $('#pm-add').textContent = 'Adicionar à sacola' + (parts.length ? ' (' + parts.join(', ') + ')' : '');
   }
   function openProduct(card, opener) {
-    cur = { card: card, id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), price: parseFloat(card.getAttribute('data-price')), size: null, qty: 1 };
-    var im = imgsHtml(card);
-    var pm = $('#pm-img'); pm.innerHTML = im.html; if (im.fit) pm.setAttribute('data-fit', im.fit); else pm.removeAttribute('data-fit');
-    if (im.top) pm.setAttribute('data-top', ''); else pm.removeAttribute('data-top');
+    var p = prodOf(card.getAttribute('data-id')); if (!p) return;
+    cur = { card: card, id: p.id, name: p.name, price: p.price, img: p.imgs[0], size: null, color: p.colors.length === 1 ? p.colors[0] : null, colors: p.colors, qty: 1 };
+    var pm = $('#pm-img'); pm.innerHTML = galleryHtml(p); pm.classList.toggle('multi', p.imgs.length > 1);
+    var gal = $('#pm-gal');
+    gal.addEventListener('scroll', function () {
+      var i = galIndex();
+      $$('[data-dot]', pm).forEach(function (b) { if ((b.getAttribute('aria-current') === 'true') !== (+b.getAttribute('data-dot') === i)) b.setAttribute('aria-current', +b.getAttribute('data-dot') === i ? 'true' : 'false'); });
+    }, { passive: true });
     $('#pm-title').textContent = cur.name;
-    var pb = $('#pm-brand'), bv = card.getAttribute('data-brand') || ''; pb.textContent = bv; pb.hidden = !bv;
+    var pb = $('#pm-brand'), bv = p.brand || ''; pb.textContent = bv; pb.hidden = !bv;
     $('#pm-price').textContent = fmt(cur.price);
     $('#pm-qty').textContent = '1';
     $('#pm-hint').textContent = '';
-    $('#pm-add').textContent = 'Adicionar à sacola';
-    var sizes = card.getAttribute('data-sizes').split(',');
+    var hasColors = p.colors.length > 0;
+    $('#pm-colors-label').hidden = !hasColors; $('#pm-colors').hidden = !hasColors;
+    $('#pm-colors').innerHTML = p.colors.map(function (c) { return '<button type="button" class="color" data-color="' + escA(c) + '" aria-pressed="' + (c === cur.color ? 'true' : 'false') + '">' + dotHtml(c) + escA(c) + '</button>'; }).join('');
+    addLabel();
+    var sizes = p.sizes;
     $('#pm-sizes').innerHTML = sizes.map(function (s) { return '<button type="button" class="size" aria-pressed="false" data-size="' + s + '">' + s + '</button>'; }).join('');
     $('#pm-sizes-label').textContent = /^\d+$/.test(sizes[0]) ? 'Número' : 'Tamanho';
     openLayer($('#layer-product'), opener);
   }
+  $('#pm-colors').addEventListener('click', function (e) {
+    var b = e.target.closest('.color'); if (!b) return;
+    cur.color = b.getAttribute('data-color'); addLabel();
+    $$('.color', this).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    $('#pm-hint').textContent = '';
+  });
   $('#pm-sizes').addEventListener('click', function (e) {
     var b = e.target.closest('.size'); if (!b) return;
     cur.size = b.getAttribute('data-size');
-    $('#pm-add').textContent = 'Adicionar à sacola (' + cur.size + ')';
+    addLabel();
     $$('.size', this).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     $('#pm-hint').textContent = '';
   });
@@ -789,6 +922,12 @@
   $('#pm-plus').addEventListener('click', function () { if (cur.qty < 9) { cur.qty++; $('#pm-qty').textContent = cur.qty; } });
 
   $('#pm-add').addEventListener('click', function () {
+    if (cur.colors.length && !cur.color) {
+      $('#pm-hint').textContent = 'Escolha a cor para continuar.';
+      var cb = $('#pm-colors'); cb.classList.remove('shake'); void cb.offsetWidth; cb.classList.add('shake');
+      cb.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      return;
+    }
     if (!cur.size) {
       var lab = $('#pm-sizes-label').textContent.toLowerCase();
       $('#pm-hint').textContent = 'Escolha o ' + (lab === 'número' ? 'número' : 'tamanho') + ' para continuar.';
@@ -797,12 +936,12 @@
       return;
     }
     var fromRect = $('#pm-img').getBoundingClientRect();
-    var src = $('#pm-img img.fg').getAttribute('src');
-    var key = cur.id + '|' + cur.size, found = null;
+    var src = cur.img;
+    var key = cur.id + '|' + cur.size + '|' + (cur.color || ''), found = null;
     cart.forEach(function (l) { if (lineKey(l) === key) found = l; });
     if (found) found.qty = Math.min(9, found.qty + cur.qty);
-    else cart.push({ id: cur.id, name: cur.name, price: cur.price, size: cur.size, qty: cur.qty, img: src });
-    var msg = cur.name + ' (' + cur.size + ') foi para a sacola';
+    else cart.push({ id: cur.id, name: cur.name, price: cur.price, size: cur.size, color: cur.color || '', qty: cur.qty, img: src });
+    var msg = cur.name + ' (' + [cur.size, cur.color].filter(Boolean).join(', ') + ') foi para a sacola';
     closeLayer($('#layer-product'), true);
     document.body.classList.remove('locked');
     renderCart(); toast(msg);
@@ -845,8 +984,8 @@
     var items = cart.map(function (l) {
       var k = lineKey(l);
       return '<div class="line"><img src="' + l.img + '" alt="">' +
-        '<div><h4>' + l.name + '</h4><p class="meta">' + (/^\d+$/.test(l.size) ? 'Número ' : 'Tamanho ') + l.size + '</p>' +
-        '<div class="row2"><div class="stepper" role="group" aria-label="Quantidade de ' + l.name + '">' +
+        '<div><h4>' + escA(l.name) + '</h4><p class="meta">' + (/^\d+$/.test(l.size) ? 'Número ' : 'Tamanho ') + escA(l.size) + (l.color ? ', cor ' + escA(l.color) : '') + '</p>' +
+        '<div class="row2"><div class="stepper" role="group" aria-label="Quantidade de ' + escA(l.name) + '">' +
         '<button type="button" data-act="dec" data-key="' + k + '" aria-label="Diminuir">−</button><output>' + l.qty + '</output>' +
         '<button type="button" data-act="inc" data-key="' + k + '" aria-label="Aumentar">+</button></div>' +
         '<span class="lp">' + fmt(l.qty * l.price) + '</span></div>' +
@@ -856,12 +995,13 @@
       '<fieldset class="opt"><legend>Como você quer receber?</legend>' +
       '<label><input type="radio" name="recv" value="retirada"' + (recv === 'retirada' ? ' checked' : '') + '><span>Retirar na loja<span class="sm">R. Barão do Rio Branco, 318</span></span><span class="push">Grátis</span></label>' +
       '<label><input type="radio" name="recv" value="entrega"' + (recv === 'entrega' ? ' checked' : '') + '><span>Entrega em Rondonópolis<span class="sm">Escolha a região abaixo</span></span><span class="push">a partir de ' + fmt(ZONES.centro.fee) + '</span></label>' +
-      (recv === 'entrega' ? '<div class="nm" style="margin-top:12px"><label for="zone">Região da entrega</label><select id="zone"><option value="">Escolha a região</option>' + Object.keys(ZONES).map(function (k) { return '<option value="' + k + '"' + (zone === k ? ' selected' : '') + '>' + ZONES[k].label + ' (' + fmt(ZONES[k].fee) + ')</option>'; }).join('') + '</select><p class="zone-note">Valores de exemplo. A loja define os bairros e as taxas. Frete grátis em compras acima de ' + fmt(FREE_OVER) + ' (exemplo).</p><p class="hint" id="zone-hint" aria-live="polite"></p></div>' : '') + '</fieldset>' +
+      (recv === 'entrega' ? '<div class="nm" style="margin-top:12px"><label for="zone">Região da entrega</label><select id="zone"><option value="">Escolha a região</option>' + Object.keys(ZONES).map(function (k) { return '<option value="' + k + '"' + (zone === k ? ' selected' : '') + '>' + ZONES[k].label + ' (' + fmt(ZONES[k].fee) + ')</option>'; }).join('') + '</select><p class="zone-note">Valores de exemplo. A loja define os bairros e as taxas. Frete grátis em compras acima de ' + fmt(FREE_OVER) + ' (exemplo).</p><p class="hint" id="zone-hint" aria-live="polite"></p></div>' +
+        '<div class="nm" style="margin-top:4px"><label for="addr">Endereço de entrega</label><input type="text" id="addr" autocomplete="street-address" placeholder="Rua, número e bairro" value="' + escA(addr) + '"><p class="hint" id="addr-hint" aria-live="polite"></p></div>' : '') + '</fieldset>' +
       '<fieldset class="opt"><legend>Como você quer pagar?</legend>' +
-      '<label><input type="radio" name="pay" value="pix"' + (pay === 'pix' ? ' checked' : '') + '><span>Pix<span class="sm">Pague na hora, pelo celular</span></span></label>' +
-      '<label><input type="radio" name="pay" value="cartao"' + (pay === 'cartao' ? ' checked' : '') + '><span>Cartão de crédito<span class="sm">Pagamento online seguro</span></span></label></fieldset>' +
-      '<div class="nm"><label for="buyer">Seu nome (opcional)</label><input type="text" id="buyer" autocomplete="name" value="' + buyer.replace(/"/g, '&quot;') + '"></div>';
-    body.innerHTML = items + opts + '<div class="sum"><div class="tot"><span>Subtotal</span><span id="t-sub"></span></div><div class="tot"><span>Entrega</span><span id="t-del"></span></div></div><p class="demo-line">Demonstração: nenhum pagamento é feito.</p>';
+      '<label><input type="radio" name="pay" value="pix"' + (pay === 'pix' ? ' checked' : '') + '><span>Pix<span class="sm">A loja manda a chave Pix no WhatsApp</span></span></label>' +
+      '<label><input type="radio" name="pay" value="cartao"' + (pay === 'cartao' ? ' checked' : '') + '><span>Cartão de crédito<span class="sm">A loja manda o link de pagamento no WhatsApp</span></span></label></fieldset>' +
+      '<div class="nm"><label for="buyer">Seu nome</label><input type="text" id="buyer" autocomplete="name" value="' + escA(buyer) + '"><p class="hint" id="buyer-hint" aria-live="polite"></p></div>';
+    body.innerHTML = items + opts + '<div class="sum"><div class="tot"><span>Subtotal</span><span id="t-sub"></span></div><div class="tot"><span>Entrega</span><span id="t-del"></span></div></div><p class="demo-line">O pedido vai pronto para o WhatsApp da loja. É só tocar em enviar.</p>';
     foot.hidden = false;
     $('#t-sub').textContent = fmt(subtotal());
     $('#t-del').textContent = (recv === 'entrega' && !zone) ? 'Escolha a região' : (delivery() ? fmt(delivery()) : 'Grátis');
@@ -889,25 +1029,48 @@
     if (e.target.id === 'zone') { zone = e.target.value; var yy = $('#cart-body').scrollTop; renderCart(); $('#cart-body').scrollTop = yy; }
     if (e.target.name === 'pay') { pay = e.target.value; }
   });
-  $('#cart-body').addEventListener('input', function (e) { if (e.target.id === 'buyer') buyer = e.target.value; });
+  $('#cart-body').addEventListener('input', function (e) {
+    if (e.target.id === 'buyer') { buyer = e.target.value; var bh = $('#buyer-hint'); if (bh) bh.textContent = ''; }
+    if (e.target.id === 'addr') { addr = e.target.value; var ah = $('#addr-hint'); if (ah) ah.textContent = ''; }
+  });
 
   function openCart(opener) { renderCart(); openLayer($('#layer-cart'), opener); }
   $('#cart-btn').addEventListener('click', function () { openCart(this); });
   $('#bar-btn').addEventListener('click', function () { openCart(this); });
 
-  /* ---------- fechamento (simulado) ---------- */
-  function showResult() {
-    var title = $('#res-title'), sub = $('#res-sub'), content = $('#res-content'), note = $('#res-note');
-    sub.textContent = 'Total do pedido: ' + fmt(total());
-    if (pay === 'cartao') {
-      title.textContent = 'Pagar com cartão';
-      content.innerHTML = '<div class="pixbox"><p>Aqui abriria a tela segura de pagamento com cartão, com as bandeiras e o parcelamento que a loja oferecer.</p></div>';
-      note.textContent = 'Demonstração: nenhum dado de cartão é pedido e nenhum pagamento foi feito.';
+  /* ---------- fechamento pelo WhatsApp ---------- */
+  function orderText(code) {
+    var t = [];
+    t.push('Olá! Quero fazer este pedido pelo site 🛍️');
+    t.push('*Pedido ' + code + '*');
+    if (DEMO) t.push('(teste do site, pode ignorar)');
+    t.push('');
+    cart.forEach(function (l) {
+      t.push(l.qty + 'x ' + l.name);
+      t.push('   ' + (/^\d+$/.test(l.size) ? 'Número ' : 'Tamanho ') + l.size + (l.color ? ', cor ' + l.color : '') + ', ' + fmt(l.qty * l.price));
+    });
+    t.push('');
+    if (recv === 'entrega') {
+      t.push('Receber: entrega, ' + ZONES[zone].label + ' (' + (delivery() ? fmt(delivery()) : 'grátis') + ')');
+      t.push('Endereço: ' + addr.trim());
     } else {
-      title.textContent = 'Pagar com Pix';
-      content.innerHTML = '<div class="pixbox"><div class="qr" aria-hidden="true"></div><p>Aqui apareceria o QR Code do Pix da loja.</p><code>Código copia e cola da demonstração</code></div>';
-      note.textContent = 'Demonstração: nenhum pagamento foi feito. Na versão final, o Pix cai direto na conta da loja.';
+      t.push('Receber: retirada na loja');
     }
+    t.push('Pagamento: ' + (pay === 'cartao' ? 'cartão de crédito' : 'Pix'));
+    t.push('*Total: ' + fmt(total()) + '*');
+    t.push('Nome: ' + buyer.trim());
+    return t.join('\n');
+  }
+  var lastUrl = '';
+  function showResult(code, msg) {
+    $('#res-title').textContent = 'Agora é só enviar';
+    $('#res-sub').textContent = 'O WhatsApp abriu com o pedido ' + code + ' pronto. Toque em enviar e a loja responde com o pagamento.';
+    $('#res-content').innerHTML = '<div class="wa" id="wa-msg"></div><a class="btn btn-wa" id="wa-again" target="_blank" rel="noopener noreferrer">Abrir o WhatsApp de novo</a>';
+    $('#wa-msg').textContent = msg.replace(/\*/g, '');
+    $('#wa-again').setAttribute('href', lastUrl);
+    var rn = $('#res-note');
+    rn.textContent = DEMO ? 'Demonstração: a mensagem vai para o WhatsApp da loja e sai marcada como teste.' : '';
+    rn.hidden = !DEMO;
     openLayer($('#layer-result'), $('#checkout'));
   }
   $('#checkout').addEventListener('click', function () {
@@ -916,12 +1079,27 @@
       var zs = $('#zone'); if (zs) zs.focus();
       return;
     }
+    if (recv === 'entrega' && !addr.trim()) {
+      var ah = $('#addr-hint'); if (ah) ah.textContent = 'Escreva o endereço para a entrega.';
+      var ai = $('#addr'); if (ai) ai.focus();
+      return;
+    }
+    if (!buyer.trim()) {
+      var bh = $('#buyer-hint'); if (bh) bh.textContent = 'Escreva seu nome para a loja saber de quem é o pedido.';
+      var bi = $('#buyer'); if (bi) bi.focus();
+      return;
+    }
+    var code = 'FL-' + String(Math.floor(1000 + Math.random() * 9000));
+    var msg = orderText(code);
+    var num = WHATSAPP[Math.floor(Math.random() * WHATSAPP.length)];
+    lastUrl = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg);
+    window.open(lastUrl, '_blank', 'noopener');
     closeLayer($('#layer-cart'), true);
-    showResult();
+    showResult(code, msg);
   });
   $('#res-done').addEventListener('click', function () {
     closeLayer($('#layer-result'));
-    cart = []; renderCart(); toast('Pedido de demonstração concluído.');
+    cart = []; renderCart(); toast('Pedido enviado. A loja vai responder no WhatsApp.');
   });
 
   /* ---------- cards ---------- */
@@ -936,12 +1114,15 @@
   var seq = 0;
   function allCards() { return $$('.card', grid); }
   function cardOf(id) { return grid.querySelector('.card[data-id="' + id + '"]'); }
+  function prodOf(id) { var r = null; products.forEach(function (p) { if (p.id === id) r = p; }); return r; }
   function escA(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
   allCards().forEach(function (card) {
     var pimg = $('.pimg', card), fg = $('img.fg', card), tg = $('.tag', card);
+    var imgs = [fg.getAttribute('src')].concat((card.getAttribute('data-more') || '').split(',').filter(Boolean));
+    var cols = (card.getAttribute('data-colors') || '').split(',').filter(Boolean);
     products.push({
       id: card.getAttribute('data-id'), name: card.getAttribute('data-name'), brand: card.getAttribute('data-brand') || '', price: parseFloat(card.getAttribute('data-price')),
-      cat: card.getAttribute('data-cat'), sizes: card.getAttribute('data-sizes').split(','), img: fg.getAttribute('src'),
+      cat: card.getAttribute('data-cat'), sizes: card.getAttribute('data-sizes').split(','), img: imgs[0], imgs: imgs, colors: cols,
       fit: pimg.getAttribute('data-fit') || '', top: pimg.hasAttribute('data-top'), tag: tg ? tg.textContent : '', soldout: false, hidden: false
     });
   });
@@ -950,19 +1131,22 @@
     if (p.img) {
       if (p.fit === 'contain') imgs += '<img class="bg" src="' + p.img + '" alt="" aria-hidden="true">';
       imgs += '<img class="fg" src="' + p.img + '" alt="' + escA(p.name) + '">';
+      if (p.imgs && p.imgs.length > 1) imgs += '<img class="alt" src="' + p.imgs[1] + '" alt="" aria-hidden="true"><span class="pcount">' + p.imgs.length + ' fotos</span>';
     } else { imgs = '<span class="nv-empty">A foto aparece aqui</span>'; }
     var tagText = p.soldout ? 'Esgotado' : (p.tag || '');
     return (tagText ? '<span class="tag' + (p.soldout ? ' dark' : '') + '">' + escA(tagText) + '</span>' : '') +
       '<button type="button" class="pimg"' + (preview ? ' tabindex="-1"' : ' data-open') + (p.fit === 'contain' ? ' data-fit="contain"' : '') + (p.top ? ' data-top' : '') + ' aria-label="Ver ' + escA(p.name) + '">' + imgs + '</button>' +
       (p.brand ? '<p class="brand">' + escA(p.brand) + '</p>' : '') +
-      '<h3>' + escA(p.name || 'Nome da peça') + '</h3><p class="price">' + fmt(p.price || 0) + '</p>' +
+      '<h3>' + escA(p.name || 'Nome da peça') + '</h3>' +
+      (p.colors && p.colors.length > 1 ? '<p class="cdots" aria-label="' + p.colors.length + ' cores">' + p.colors.slice(0, 6).map(dotHtml).join('') + '</p>' : '') +
+      '<p class="price">' + fmt(p.price || 0) + '</p>' +
       '<button type="button" class="btn btn-outline"' + (preview ? ' tabindex="-1"' : ' data-open') + '>Escolher tamanho</button>';
   }
   function makeCard(p) {
     var art = document.createElement('article');
     art.className = 'card';
     art.setAttribute('data-id', p.id); art.setAttribute('data-name', p.name); art.setAttribute('data-price', p.price);
-    art.setAttribute('data-cat', p.cat); art.setAttribute('data-sizes', p.sizes.join(',')); art.setAttribute('data-brand', p.brand || '');
+    art.setAttribute('data-cat', p.cat); art.setAttribute('data-sizes', p.sizes.join(',')); art.setAttribute('data-brand', p.brand || ''); art.setAttribute('data-colors', p.colors.join(','));
     art.innerHTML = cardInner(p, false);
     return art;
   }
@@ -979,6 +1163,8 @@
     $$('[data-open]', card).forEach(function (b) { b.disabled = !!p.soldout; });
     $('.btn-outline', card).textContent = p.soldout ? 'Esgotado' : 'Escolher tamanho';
   }
+
+  products.forEach(function (p) { var c = cardOf(p.id); if (c) c.innerHTML = cardInner(p, false); });
 
   /* ---------- marcas ---------- */
   var brands = [];
@@ -1024,16 +1210,20 @@
       return '<button type="button" class="chip sm" data-brand="' + escA(n) + '" aria-pressed="' + (n === brandFilter ? 'true' : 'false') + '">' + (n === 'todas' ? 'Todas' : escA(n)) + '</button>';
     }).join('');
   }
+  function inCat(p) { return filter === 'todos' || (filter === 'lancamentos' ? !!p.tag && !p.soldout : p.cat === filter); }
   function applyFilter() {
     var anyAcc = products.some(function (p) { return p.cat === 'acessorios' && !p.hidden; });
     $('[data-filter="acessorios"]').hidden = !anyAcc;
     if (!anyAcc && filter === 'acessorios') filter = 'todos';
-    var inCat = products.filter(function (p) { return !p.hidden && (filter === 'todos' || p.cat === filter); });
-    renderBrandChips(inCat);
+    var anyNew = products.some(function (p) { return p.tag && !p.soldout && !p.hidden; });
+    $('[data-filter="lancamentos"]').hidden = !anyNew;
+    if (!anyNew && filter === 'lancamentos') filter = 'todos';
+    var inCatList = products.filter(function (p) { return !p.hidden && inCat(p); });
+    renderBrandChips(inCatList);
     var n = 0;
     products.forEach(function (p) {
       var card = cardOf(p.id); if (!card) return;
-      var ok = !p.hidden && (filter === 'todos' || p.cat === filter) && (brandFilter === 'todas' || p.brand === brandFilter);
+      var ok = !p.hidden && inCat(p) && (brandFilter === 'todas' || p.brand === brandFilter);
       card.hidden = !ok; if (ok) n++;
     });
     $('#count-note').textContent = n + (n === 1 ? ' peça' : ' peças');
@@ -1049,6 +1239,14 @@
     chip.addEventListener('click', function () {
       filter = chip.getAttribute('data-filter'); applyFilter(); animateShown();
     });
+  });
+  // painéis clicáveis: filtram a coleção e descem até ela
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-go]'); if (!g) return;
+    filter = g.getAttribute('data-go'); brandFilter = g.getAttribute('data-brand-go') || 'todas';
+    applyFilter();
+    document.getElementById('colecao').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    setTimeout(animateShown, reduce ? 0 : 450);
   });
   $('#brand-chips').addEventListener('click', function (e) {
     var c = e.target.closest('[data-brand]'); if (!c) return;
@@ -1107,6 +1305,55 @@
     $('#nv-sizes').innerHTML = sizeList(nv.cat).map(function (s) { return '<label class="pill"><input type="checkbox" value="' + s + '"' + (s === 'Único' ? ' checked' : '') + '><span>' + s + '</span></label>'; }).join('');
     $('#nv-all').hidden = nv.cat === 'acessorios';
   }
+  var colorList = ['Preto', 'Branco', 'Off white', 'Bege', 'Nude', 'Cinza', 'Azul', 'Azul marinho', 'Rosa', 'Verde', 'Vermelho', 'Bordô', 'Marrom', 'Roxo'];
+  products.forEach(function (p) { p.colors.forEach(function (c) { if (!colorList.some(function (x) { return brandKey(x) === brandKey(c); })) colorList.push(c); }); });
+  function renderColors(keep) {
+    $('#nv-colors').innerHTML = colorList.map(function (c) {
+      return '<label class="pill"><input type="checkbox" value="' + escA(c) + '"' + (keep.indexOf(c) > -1 ? ' checked' : '') + '><span>' + dotHtml(c) + escA(c) + '</span></label>';
+    }).join('');
+  }
+  function addColor() {
+    var inp = $('#nv-color-text'), raw = inp.value.trim(); if (!raw) return;
+    var label = titleCase(raw), same = null;
+    colorList.forEach(function (c) { if (brandKey(c) === brandKey(label)) same = c; });
+    if (!same) { colorList.push(label); same = label; }
+    var keep = $$('#nv-colors input:checked').map(function (i) { return i.value; });
+    if (keep.indexOf(same) < 0) keep.push(same);
+    renderColors(keep); inp.value = ''; updateNew();
+  }
+  $('#nv-color-add').addEventListener('click', addColor);
+  $('#nv-color-text').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addColor(); } });
+  function renderShots() {
+    var h = nv.shots.map(function (s, i) {
+      return '<div class="shot"><img src="' + s.src + '" alt="Foto ' + (i + 1) + '">' + (i === 0 ? '<span class="cap">Capa</span>' : '') +
+        '<button type="button" class="rmx" data-shot="rm" data-i="' + i + '" aria-label="Remover foto ' + (i + 1) + '">×</button>' +
+        (i > 0 ? '<button type="button" class="mkcap" data-shot="cap" data-i="' + i + '">Virar capa</button>' : '') + '</div>';
+    }).join('');
+    if (nv.shots.length < 6) h += '<label class="shot-add" for="nv-file"><b>+</b>' + (nv.shots.length ? 'Mais uma foto' : 'Adicionar foto') + '<small>Câmera ou galeria</small></label>';
+    $('#nv-shots').innerHTML = h;
+  }
+  function addPhotos(srcs) {
+    srcs = srcs.slice(0, 6 - nv.shots.length);
+    if (!srcs.length) return;
+    Promise.all(srcs.map(function (src) {
+      return new Promise(function (res) {
+        var im = new Image();
+        im.onload = function () { res({ src: src, fit: (im.naturalWidth / im.naturalHeight > 1.15) ? 'contain' : '' }); };
+        im.onerror = function () { res(null); };
+        im.src = src;
+      });
+    })).then(function (list) {
+      list.forEach(function (s) { if (s && nv.shots.length < 6) nv.shots.push(s); });
+      renderShots(); updateNew();
+    });
+  }
+  $('#nv-shots').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-shot]'); if (!b) return;
+    var i = +b.getAttribute('data-i');
+    if (b.getAttribute('data-shot') === 'rm') nv.shots.splice(i, 1);
+    else nv.shots.unshift(nv.shots.splice(i, 1)[0]);
+    renderShots(); updateNew();
+  });
   function renderBrands() {
     var list = brands.slice().sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); });
     var html = list.map(function (b) { return '<label class="pill"><input type="radio" name="nvbrand" value="' + escA(b) + '"><span>' + escA(b) + '</span></label>'; }).join('');
@@ -1146,37 +1393,32 @@
     }
     var bh = $('#nv-brand-hint'); if (bh.innerHTML !== hint) bh.innerHTML = hint;   // não redesenha se não mudou (senão o toque na sugestão se perde)
     var miss = [];
-    if (!nv.img) miss.push('a foto'); if (!name) miss.push('o nome'); if (!br.chosen) miss.push('a marca'); if (!price) miss.push('o preço'); if (!sizes.length) miss.push('os tamanhos');
+    var colors = $$('#nv-colors input:checked').map(function (i) { return i.value; });
+    if (!nv.shots.length) miss.push('a foto'); if (!name) miss.push('o nome'); if (!br.chosen) miss.push('a marca'); if (!colors.length) miss.push('as cores'); if (!price) miss.push('o preço'); if (!sizes.length) miss.push('os tamanhos');
     $('#nv-hint').textContent = miss.length ? 'Falta: ' + miss.join(', ') + '.' : '';
     $('#nv-pub').disabled = miss.length > 0;
     var pv = document.createElement('article'); pv.className = 'card pv';
-    pv.innerHTML = cardInner({ name: name, brand: br.label, price: price, img: nv.img, fit: nv.fit, tag: 'Novo', top: false, soldout: false }, true);
+    var first = nv.shots[0] || { src: '', fit: '' };
+    pv.innerHTML = cardInner({ name: name, brand: br.label, price: price, img: first.src, imgs: nv.shots.map(function (s) { return s.src; }), colors: colors, fit: first.fit, tag: 'Novo', top: false, soldout: false }, true);
     var box = $('#nv-preview'); box.innerHTML = ''; box.appendChild(pv);
-    return { name: name, price: price, sizes: sizes, cat: cat, brand: br.label, brandIsNew: br.isNew };
-  }
-  function setPhoto(src) {
-    var im = new Image();
-    im.onload = function () {
-      nv.img = src; nv.fit = (im.naturalWidth / im.naturalHeight > 1.15) ? 'contain' : '';
-      var pv = $('#nv-prev'); pv.src = src; pv.hidden = false;
-      $('#nv-drop').classList.add('has'); $('#nv-drop-b').textContent = 'Trocar foto';
-      updateNew();
-    };
-    im.src = src;
+    return { name: name, price: price, sizes: sizes, cat: cat, colors: colors, brand: br.label, brandIsNew: br.isNew };
   }
   function openNew() {
-    nv = { img: '', fit: '', cat: 'roupas' };
+    nv = { shots: [], cat: 'roupas' };
     $('#nv-form').reset();
-    var pv = $('#nv-prev'); pv.hidden = true; pv.removeAttribute('src');
-    $('#nv-drop').classList.remove('has'); $('#nv-drop-b').textContent = 'Tirar foto ou escolher da galeria';
-    renderBrands(); renderSizes(); updateNew(); showView('adm-new');
+    renderShots(); renderBrands(); renderColors([]); renderSizes(); updateNew(); showView('adm-new');
   }
   $('#nv-file').addEventListener('change', function () {
-    var f = this.files && this.files[0]; if (!f) return;
-    if (!/^image\//.test(f.type)) { $('#nv-hint').textContent = 'Escolha um arquivo de imagem.'; return; }
-    setPhoto(URL.createObjectURL(f));
+    var files = Array.prototype.slice.call(this.files || []);
+    var imgs = files.filter(function (f) { return /^image\//.test(f.type); });
+    if (files.length && !imgs.length) { $('#nv-hint').textContent = 'Escolha um arquivo de imagem.'; }
+    addPhotos(imgs.map(function (f) { return URL.createObjectURL(f); }));
+    this.value = '';
   });
-  $('#nv-sample').addEventListener('click', function () { var ex = $('.ig-grid img'); if (ex) setPhoto(ex.getAttribute('src')); });
+  $('#nv-sample').addEventListener('click', function () {
+    var have = nv.shots.map(function (s) { return s.src; });
+    addPhotos(['img/ig-4.jpg', 'img/hero-b.jpg', 'img/ig-1.jpg'].filter(function (s) { return have.indexOf(s) < 0; }));
+  });
   $('#nv-name').addEventListener('input', updateNew);
   $('#nv-brand-text').addEventListener('input', updateNew);
   $('#nv-brand-other').addEventListener('click', function (e) {
@@ -1196,7 +1438,8 @@
     var f = updateNew();
     if ($('#nv-pub').disabled) return;
     if (f.brand && brands.indexOf(f.brand) < 0) brands.push(f.brand);
-    var p = { id: 'n' + (++seq), name: f.name, brand: f.brand, price: f.price, cat: f.cat, sizes: f.sizes, img: nv.img, fit: nv.fit, top: false, tag: 'Novo', soldout: false, hidden: false };
+    var imgs = nv.shots.map(function (s) { return s.src; });
+    var p = { id: 'n' + (++seq), name: f.name, brand: f.brand, price: f.price, cat: f.cat, sizes: f.sizes, colors: f.colors, img: imgs[0], imgs: imgs, fit: nv.shots[0].fit, top: false, tag: 'Novo', soldout: false, hidden: false };
     products.unshift(p);
     grid.insertBefore(makeCard(p), grid.firstChild);
     filter = 'todos'; brandFilter = 'todas'; applyFilter();
@@ -1261,6 +1504,12 @@
   batchTriggers = ScrollTrigger.batch(cards, {
     start: 'top 92%', once: true,
     onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.65, stagger: 0.08, ease: 'power2.out', clearProps: 'transform' }); }
+  });
+
+  gsap.set('.panel-link', { opacity: 0, y: 24 });
+  ScrollTrigger.batch('.panel-link', {
+    start: 'top 94%', once: true,
+    onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out', clearProps: 'transform' }); }
   });
 
   gsap.set('.ig-grid a', { opacity: 0, scale: 0.92 });
